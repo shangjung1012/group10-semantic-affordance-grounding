@@ -2,6 +2,8 @@
 
 Group member: 蔡尚融
 
+Repository link: <https://github.com/shangjung1012/group10-semantic-affordance-grounding>
+
 ## Overview
 
 This repository implements Homework 5: Ontology-based Semantic Grounding. The goal is to model task objects from the AI Capstone baseline tasks and infer which objects are graspable by a robot gripper.

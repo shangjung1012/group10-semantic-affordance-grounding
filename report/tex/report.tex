@@ -73,6 +73,9 @@
 This report describes the Group 10 submission for Homework 5. The project builds a compact ontology for grounding baseline task objects in the AI Capstone environment and inferring which objects are graspable by a robot gripper. The workflow uses RDF/OWL for modeling, OWL/RDFS closure plus a documented rule layer for reasoning, and SPARQL for querying inferred graspable objects. The implementation is reproducible with \texttt{uv}, RDFLib, and \texttt{owlrl}.
 \end{abstract}
 
+\noindent\textbf{Repository link:}
+\href{https://github.com/shangjung1012/group10-semantic-affordance-grounding}{github.com/shangjung1012/group10-semantic-affordance-grounding}
+
 \section{Project Overview}
 
 The goal of this homework is to create a semantic grounding layer for a robot manipulation environment. Instead of representing objects only as visual labels, the ontology represents each object as a typed individual with a task role, affordances, object labels, colors, and pose-frame identifiers. The reasoning workflow then infers \texttt{cap:GraspableObject} membership from the presence of a grasping affordance.

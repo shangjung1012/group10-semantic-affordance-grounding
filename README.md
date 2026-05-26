@@ -2,6 +2,8 @@
 
 Homework 5 submission for AI Capstone 2026. This project builds a compact ontology layer for grounding baseline task objects and inferring which objects are graspable by a robot gripper.
 
+Repository link: <https://github.com/shangjung1012/group10-semantic-affordance-grounding>
+
 ## Group Members
 
 - 蔡尚融
