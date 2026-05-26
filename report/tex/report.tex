@@ -4,10 +4,13 @@
 \usepackage[left=2.0cm, right=2.0cm, top=2.2cm, bottom=2.2cm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{fontspec}
+\usepackage{xeCJK}
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{tabularx}
 \usepackage{enumitem}
 \usepackage{xcolor}
 \usepackage{hyperref}
@@ -50,10 +53,17 @@
 
 \setlist[itemize]{itemsep=2pt, topsep=4pt}
 \setlist[enumerate]{itemsep=2pt, topsep=4pt}
+\setlength{\emergencystretch}{2em}
+\setmainfont{Latin Modern Roman}
+\setmonofont{Latin Modern Mono}
+\setCJKmainfont{Noto Serif CJK TC}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\smallcode}[1]{\texttt{\footnotesize #1}}
 
 \title{\textbf{Homework 5: Ontology-based Semantic Grounding}\\
 \large Group 10 Semantic Affordance Grounding}
-\author{Group 10}
+\author{Group 10\\蔡尚融}
 \date{AI Capstone 2026}
 
 \begin{document}
@@ -79,21 +89,23 @@ The repository contains the required ontology files, inferred graph, SPARQL quer
 
 \begin{table}[h]
 \centering
-\begin{tabular}{p{0.38\linewidth} p{0.52\linewidth}}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.36\linewidth} Y}
 \toprule
 \textbf{Path} & \textbf{Purpose} \\
 \midrule
-\texttt{ontology/group-ontology.ttl} & Group 10 authored ontology with task objects, task roles, affordances, and the formal graspability axiom. \\
-\texttt{ontology/imports/course-affordance.ttl} & Provided course ontology, with a minimal Turtle syntax repair for \texttt{cap:hasApproxWidth}. \\
-\texttt{ontology/imports/course-alignment.ttl} & Provided SKOS alignment resource for semantic traceability. \\
-\texttt{ontology/inferred-results.ttl} & Exported graph after reasoning. \\
-\texttt{queries/graspable\_objects.rq} & Required SPARQL query for inferred graspable objects. \\
-\texttt{queries/task\_objects.rq} & Additional query for all modeled baseline task objects. \\
-\texttt{results/graspable\_objects\_output.txt} & Saved output of the required query. \\
-\texttt{src/run\_reasoning.py} & Reproducible local reasoning and query workflow. \\
-\texttt{tests/test\_hw5\_workflow.py} & Tests for parsing, modeling constraints, inference, and saved outputs. \\
+\path{ontology/group-ontology.ttl} & Group 10 authored ontology with task objects, task roles, affordances, and the formal graspability axiom. \\
+\path{ontology/imports/course-affordance.ttl} & Provided course ontology, with a minimal Turtle syntax repair for \smallcode{cap:hasApproxWidth}. \\
+\path{ontology/imports/course-alignment.ttl} & Provided SKOS alignment resource for semantic traceability. \\
+\path{ontology/inferred-results.ttl} & Exported graph after reasoning. \\
+\path{queries/graspable_objects.rq} & Required SPARQL query for inferred graspable objects. \\
+\path{queries/task_objects.rq} & Additional query for all modeled baseline task objects. \\
+\path{results/graspable_objects_output.txt} & Saved output of the required query. \\
+\path{src/run_reasoning.py} & Reproducible local reasoning and query workflow. \\
+\path{tests/test_hw5_workflow.py} & Tests for parsing, modeling constraints, inference, and saved outputs. \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Main repository files for the HW5 submission.}
 \end{table}
 
@@ -121,22 +133,26 @@ The ontology separates object type, task role, affordance, and instance. This di
 
 \begin{table}[h]
 \centering
-\begin{tabular}{p{0.23\linewidth} p{0.28\linewidth} p{0.35\linewidth}}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.18\linewidth} >{\raggedright\arraybackslash}p{0.25\linewidth} Y}
 \toprule
 \textbf{Layer} & \textbf{Meaning} & \textbf{Examples} \\
 \midrule
-Object type & Shared class for object category & \texttt{cap:Cup}, \texttt{cap:Knife}, \texttt{cap:ToyBlock} \\
-Task role & Role played in a task & \texttt{cap:TargetObject}, \texttt{cap:ReferenceObject} \\
-Affordance & Action possibility in context & \texttt{cap:GraspingAffordance}, \texttt{cap:ContainmentAffordance} \\
-Instance & Group-specific observed object & \texttt{g10:blueCup01}, \texttt{g10:block01} \\
+Object type & Shared class for object category & \smallcode{cap:Cup}, \smallcode{cap:Knife}, \smallcode{cap:ToyBlock} \\
+Task role & Role played in a task & \smallcode{cap:TargetObject}, \smallcode{cap:ReferenceObject} \\
+Affordance & Action possibility in context & \smallcode{cap:GraspingAffordance}, \smallcode{cap:ContainmentAffordance} \\
+Instance & Group-specific observed object & \smallcode{g10:blueCup01}, \smallcode{g10:block01} \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Ontology modeling layers.}
 \end{table}
 
 \begin{table}[h]
 \centering
-\begin{tabular}{p{0.22\linewidth} p{0.18\linewidth} p{0.22\linewidth} p{0.25\linewidth}}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.22\linewidth} >{\raggedright\arraybackslash}p{0.15\linewidth} >{\raggedright\arraybackslash}p{0.25\linewidth} Y}
 \toprule
 \textbf{Instance} & \textbf{Type} & \textbf{Role} & \textbf{Affordance} \\
 \midrule
@@ -149,7 +165,7 @@ Instance & Group-specific observed object & \texttt{g10:blueCup01}, \texttt{g10:
 \texttt{g10:block02} & \texttt{cap:ToyBlock} & \texttt{cap:CollectableObject} & grasping \\
 \texttt{g10:basket01} & \texttt{cap:Basket} & \texttt{cap:ContainerTarget} & containment \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \caption{Baseline task objects modeled by Group 10.}
 \end{table}
 
@@ -181,7 +197,7 @@ The source group ontology does not manually assert Group 10 objects as \texttt{c
     \item Load the course SKOS alignment ontology for traceability.
     \item Load the Group 10 ontology.
     \item Apply OWL/RDFS closure with \texttt{owlrl}.
-    \item Materialize the assignment-specific graspability rule for physical objects that have a \texttt{cap:GraspingAffordance}.
+    \item Materialize the assignment-specific graspability rule for physical objects with a grasping affordance.
     \item Export \texttt{ontology/inferred-results.ttl}.
     \item Run SPARQL queries and save outputs under \texttt{results/}.
 \end{enumerate}

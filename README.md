@@ -4,7 +4,7 @@ Homework 5 submission for AI Capstone 2026. This project builds a compact ontolo
 
 ## Group Members
 
-Group 10
+- 蔡尚融
 
 ## Selected Tasks
 
