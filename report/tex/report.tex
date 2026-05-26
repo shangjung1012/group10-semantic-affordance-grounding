@@ -1,0 +1,250 @@
+% !TEX program = xelatex
+\documentclass[a4paper, 11pt]{article}
+
+\usepackage[left=2.0cm, right=2.0cm, top=2.2cm, bottom=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!50!black,
+    urlcolor=blue!60!black,
+    citecolor=blue!50!black
+}
+
+\lstdefinelanguage{Turtle}{
+    morekeywords={@prefix,a},
+    sensitive=true,
+    morecomment=[l]{\#},
+    morestring=[b]",
+}
+
+\lstdefinelanguage{SPARQL}{
+    morekeywords={PREFIX,SELECT,DISTINCT,WHERE,OPTIONAL,FILTER,ORDER,BY,VALUES},
+    sensitive=true,
+    morecomment=[l]{\#},
+    morestring=[b]",
+}
+
+\lstset{
+    basicstyle=\small\ttfamily,
+    backgroundcolor=\color{gray!8},
+    frame=single,
+    rulecolor=\color{gray!35},
+    breaklines=true,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+    tabsize=2,
+    xleftmargin=0.5em,
+    xrightmargin=0.5em
+}
+
+\setlist[itemize]{itemsep=2pt, topsep=4pt}
+\setlist[enumerate]{itemsep=2pt, topsep=4pt}
+
+\title{\textbf{Homework 5: Ontology-based Semantic Grounding}\\
+\large Group 10 Semantic Affordance Grounding}
+\author{Group 10}
+\date{AI Capstone 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This report describes the Group 10 submission for Homework 5. The project builds a compact ontology for grounding baseline task objects in the AI Capstone environment and inferring which objects are graspable by a robot gripper. The workflow uses RDF/OWL for modeling, OWL/RDFS closure plus a documented rule layer for reasoning, and SPARQL for querying inferred graspable objects. The implementation is reproducible with \texttt{uv}, RDFLib, and \texttt{owlrl}.
+\end{abstract}
+
+\section{Project Overview}
+
+The goal of this homework is to create a semantic grounding layer for a robot manipulation environment. Instead of representing objects only as visual labels, the ontology represents each object as a typed individual with a task role, affordances, object labels, colors, and pose-frame identifiers. The reasoning workflow then infers \texttt{cap:GraspableObject} membership from the presence of a grasping affordance.
+
+The repository contains the required ontology files, inferred graph, SPARQL queries, saved query outputs, source code, tests, README, and this report. The baseline tasks modeled in the ontology are:
+
+\begin{itemize}
+    \item Cup stacking: blue cup and pink cup.
+    \item Cutlery arrangement: knife, fork, and plate.
+    \item Toy block collection: toy blocks and basket.
+\end{itemize}
+
+\section{Repository Contents}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{0.38\linewidth} p{0.52\linewidth}}
+\toprule
+\textbf{Path} & \textbf{Purpose} \\
+\midrule
+\texttt{ontology/group-ontology.ttl} & Group 10 authored ontology with task objects, task roles, affordances, and the formal graspability axiom. \\
+\texttt{ontology/imports/course-affordance.ttl} & Provided course ontology, with a minimal Turtle syntax repair for \texttt{cap:hasApproxWidth}. \\
+\texttt{ontology/imports/course-alignment.ttl} & Provided SKOS alignment resource for semantic traceability. \\
+\texttt{ontology/inferred-results.ttl} & Exported graph after reasoning. \\
+\texttt{queries/graspable\_objects.rq} & Required SPARQL query for inferred graspable objects. \\
+\texttt{queries/task\_objects.rq} & Additional query for all modeled baseline task objects. \\
+\texttt{results/graspable\_objects\_output.txt} & Saved output of the required query. \\
+\texttt{src/run\_reasoning.py} & Reproducible local reasoning and query workflow. \\
+\texttt{tests/test\_hw5\_workflow.py} & Tests for parsing, modeling constraints, inference, and saved outputs. \\
+\bottomrule
+\end{tabular}
+\caption{Main repository files for the HW5 submission.}
+\end{table}
+
+\section{Namespace Policy}
+
+The shared course namespace is:
+
+\begin{lstlisting}[language=Turtle]
+@prefix cap: <https://hcis.io/ontology/aicapstone/2026/> .
+\end{lstlisting}
+
+The Group 10 namespace is:
+
+\begin{lstlisting}[language=Turtle]
+@prefix g10: <https://hcis.io/ontology/aicapstone/2026/group10/> .
+\end{lstlisting}
+
+Course-level classes and properties are reused from \texttt{cap:}. Group-specific individuals, tasks, affordance individuals, and role individuals are declared under \texttt{g10:}. For example, \texttt{g10:blueCup01} is a group-specific object instance, while \texttt{cap:Cup} is a shared course class.
+
+Task roles are represented as Group 10 role individuals. For example, \texttt{g10:targetObjectRole} is typed as \texttt{cap:TargetObject}, and object instances point to that individual through \texttt{cap:hasTaskRole}. This avoids using OWL classes directly as property values.
+
+\section{Ontology Design}
+
+The ontology separates object type, task role, affordance, and instance. This distinction is important because task relevance is not identical to graspability. For example, the plate is relevant as a reference object in cutlery arrangement, and the basket is relevant as a container target in toy block collection, but neither is modeled as a direct grasp target in this baseline submission.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{0.23\linewidth} p{0.28\linewidth} p{0.35\linewidth}}
+\toprule
+\textbf{Layer} & \textbf{Meaning} & \textbf{Examples} \\
+\midrule
+Object type & Shared class for object category & \texttt{cap:Cup}, \texttt{cap:Knife}, \texttt{cap:ToyBlock} \\
+Task role & Role played in a task & \texttt{cap:TargetObject}, \texttt{cap:ReferenceObject} \\
+Affordance & Action possibility in context & \texttt{cap:GraspingAffordance}, \texttt{cap:ContainmentAffordance} \\
+Instance & Group-specific observed object & \texttt{g10:blueCup01}, \texttt{g10:block01} \\
+\bottomrule
+\end{tabular}
+\caption{Ontology modeling layers.}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{p{0.22\linewidth} p{0.18\linewidth} p{0.22\linewidth} p{0.25\linewidth}}
+\toprule
+\textbf{Instance} & \textbf{Type} & \textbf{Role} & \textbf{Affordance} \\
+\midrule
+\texttt{g10:blueCup01} & \texttt{cap:Cup} & \texttt{cap:TargetObject} & grasping, stackability \\
+\texttt{g10:pinkCup01} & \texttt{cap:Cup} & \texttt{cap:TargetObject} & grasping, stackability \\
+\texttt{g10:knife01} & \texttt{cap:Knife} & \texttt{cap:TargetObject} & grasping \\
+\texttt{g10:fork01} & \texttt{cap:Fork} & \texttt{cap:TargetObject} & grasping \\
+\texttt{g10:plate01} & \texttt{cap:Plate} & \texttt{cap:ReferenceObject} & support \\
+\texttt{g10:block01} & \texttt{cap:ToyBlock} & \texttt{cap:CollectableObject} & grasping \\
+\texttt{g10:block02} & \texttt{cap:ToyBlock} & \texttt{cap:CollectableObject} & grasping \\
+\texttt{g10:basket01} & \texttt{cap:Basket} & \texttt{cap:ContainerTarget} & containment \\
+\bottomrule
+\end{tabular}
+\caption{Baseline task objects modeled by Group 10.}
+\end{table}
+
+\section{Reasoning Pattern}
+
+The central inferred class is \texttt{cap:GraspableObject}. The provided course resources already refer to this course-level term, and Group 10 adds its formal class definition because the starter affordance ontology does not include the full OWL axiom. The definition follows the homework specification: a graspable object is a physical object that has at least one grasping affordance.
+
+\begin{lstlisting}[language=Turtle]
+cap:GraspableObject
+    a owl:Class ;
+    rdfs:subClassOf cap:PhysicalObject ;
+    owl:equivalentClass [
+        a owl:Class ;
+        owl:intersectionOf (
+            cap:PhysicalObject
+            [
+                a owl:Restriction ;
+                owl:onProperty cap:hasAffordance ;
+                owl:someValuesFrom cap:GraspingAffordance
+            ]
+        )
+    ] .
+\end{lstlisting}
+
+The source group ontology does not manually assert Group 10 objects as \texttt{cap:GraspableObject}. The local workflow performs the following steps:
+
+\begin{enumerate}
+    \item Load the course affordance ontology.
+    \item Load the course SKOS alignment ontology for traceability.
+    \item Load the Group 10 ontology.
+    \item Apply OWL/RDFS closure with \texttt{owlrl}.
+    \item Materialize the assignment-specific graspability rule for physical objects that have a \texttt{cap:GraspingAffordance}.
+    \item Export \texttt{ontology/inferred-results.ttl}.
+    \item Run SPARQL queries and save outputs under \texttt{results/}.
+\end{enumerate}
+
+The additional materialization rule is documented because RDFLib and \texttt{owlrl} provide a lightweight reasoning workflow rather than a complete OWL DL reasoner. This keeps the inference reproducible while still matching the required homework pattern.
+
+\section{SPARQL Query and Results}
+
+The required query retrieves inferred \texttt{cap:GraspableObject} individuals in the Group 10 namespace and reports each object's object label and role class.
+
+\begin{lstlisting}[language=SPARQL]
+PREFIX cap: <https://hcis.io/ontology/aicapstone/2026/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT ?obj ?label ?role
+WHERE {
+  ?obj a cap:GraspableObject .
+  FILTER(STRSTARTS(STR(?obj),
+    "https://hcis.io/ontology/aicapstone/2026/group10/"))
+  OPTIONAL { ?obj cap:hasObjectLabel ?label . }
+  OPTIONAL {
+    ?obj cap:hasTaskRole ?roleIndividual .
+    VALUES ?role {
+      cap:TargetObject
+      cap:ReferenceObject
+      cap:ContainerTarget
+      cap:CollectableObject
+    }
+    ?roleIndividual a ?role .
+  }
+}
+ORDER BY ?obj
+\end{lstlisting}
+
+The saved output contains six inferred graspable objects:
+
+\begin{lstlisting}
+obj           | label            | role
+--------------+------------------+----------------------
+g10:block01   | toy_block_red    | cap:CollectableObject
+g10:block02   | toy_block_yellow | cap:CollectableObject
+g10:blueCup01 | blue_cup         | cap:TargetObject
+g10:fork01    | fork             | cap:TargetObject
+g10:knife01   | knife            | cap:TargetObject
+g10:pinkCup01 | pink_cup         | cap:TargetObject
+\end{lstlisting}
+
+\texttt{g10:plate01} and \texttt{g10:basket01} are not included. They are task-relevant objects, but they do not have the asserted grasping affordance in this baseline model.
+
+\section{Reproducibility}
+
+The workflow can be run locally from the repository root:
+
+\begin{lstlisting}[language=bash]
+uv sync
+uv run python src/run_reasoning.py
+uv run pytest
+\end{lstlisting}
+
+The tests verify that Turtle files parse, Group 10 objects are not manually asserted as \texttt{cap:GraspableObject}, task-role values are Group 10 role individuals, expected objects are inferred as graspable, and saved query output matches the expected result.
+
+\section{Limitations}
+
+This submission intentionally stays within the baseline task scope. It does not model advanced gripper constraints, mass, deformability, task success criteria, or policy success/failure comparisons. The reasoning workflow is designed as a compact educational implementation rather than a complete OWL DL reasoning system.
+
+\end{document}
