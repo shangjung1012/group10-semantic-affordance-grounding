@@ -47,7 +47,7 @@ This submission models all baseline Homework 5 tasks:
 - Course vocabulary: `cap: <https://hcis.io/ontology/aicapstone/2026/>`
 - Group 10 vocabulary and instances: `g10: <https://hcis.io/ontology/aicapstone/2026/group10/>`
 
-Shared classes and properties such as `cap:Cup`, `cap:hasAffordance`, and `cap:GraspableObject` use the `cap:` namespace. Group-specific individuals such as `g10:blueCup01` use the `g10:` namespace.
+Shared classes and properties such as `cap:Cup`, `cap:hasAffordance`, and `cap:GraspableObject` use the `cap:` namespace. Group-specific individuals such as `g10:blueCup01` and `g10:targetObjectRole` use the `g10:` namespace.
 
 ## Ontology Design
 
@@ -57,7 +57,9 @@ The ontology separates object type, task role, affordance, and instance. Graspab
 cap:PhysicalObject and hasAffordance some cap:GraspingAffordance
 ```
 
-The group ontology defines the formal `cap:GraspableObject` class axiom because the provided starter ontology documents the term but does not include the full OWL class definition.
+The group ontology defines the formal `cap:GraspableObject` class axiom because the provided starter ontology documents the course-level term but does not include the full OWL class definition. This is a formalization of an existing course term, not a new Group 10 class in the `cap:` namespace.
+
+Task roles are represented with Group 10 role individuals, such as `g10:targetObjectRole a cap:TargetObject`, instead of using course role classes directly as `cap:hasTaskRole` values.
 
 | Object | Type | Role | Affordance | Graspable result |
 | --- | --- | --- | --- | --- |
@@ -110,6 +112,6 @@ The query output is saved in `results/graspable_objects_output.txt`.
 
 ## What Is Inferred
 
-The group ontology does not manually assert Group 10 objects as `cap:GraspableObject`. Instead, `src/run_reasoning.py` loads the course and group ontologies, applies OWL/RDFS closure with `owlrl`, then materializes the assignment-specific rule: a physical object with a grasping affordance is typed as `cap:GraspableObject`.
+The group ontology does not manually assert Group 10 objects as `cap:GraspableObject`. Instead, `src/run_reasoning.py` loads the course affordance ontology, course alignment ontology, and group ontology, applies OWL/RDFS closure with `owlrl`, then materializes the assignment-specific rule: a physical object with a grasping affordance is typed as `cap:GraspableObject`.
 
 This produces inferred graspable memberships for cups, knife, fork, and toy blocks. Plate and basket remain outside the graspable result because their asserted affordances are support and containment, respectively.

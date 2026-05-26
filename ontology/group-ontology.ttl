@@ -72,6 +72,26 @@ g10:containmentAffordance
     rdfs:label "containment affordance"@en ;
     rdfs:comment "A reusable affordance individual indicating that a container can receive collectable objects."@en .
 
+g10:targetObjectRole
+    a cap:TargetObject ;
+    rdfs:label "target object role"@en ;
+    rdfs:comment "A reusable Group 10 role individual for objects that are directly manipulated in a task."@en .
+
+g10:referenceObjectRole
+    a cap:ReferenceObject ;
+    rdfs:label "reference object role"@en ;
+    rdfs:comment "A reusable Group 10 role individual for objects used as spatial or semantic references."@en .
+
+g10:collectableObjectRole
+    a cap:CollectableObject ;
+    rdfs:label "collectable object role"@en ;
+    rdfs:comment "A reusable Group 10 role individual for objects collected into another object or location."@en .
+
+g10:containerTargetRole
+    a cap:ContainerTarget ;
+    rdfs:label "container target role"@en ;
+    rdfs:comment "A reusable Group 10 role individual for objects that receive or contain other objects."@en .
+
 g10:cupStackingTask
     a cap:ManipulationTask ;
     rdfs:label "cup stacking task"@en ;
@@ -99,7 +119,7 @@ g10:blueCup01
     cap:hasColor "blue" ;
     cap:hasObjectLabel "blue_cup" ;
     cap:hasPoseFrame "world/object_blue_cup" ;
-    cap:hasTaskRole cap:TargetObject ;
+    cap:hasTaskRole g10:targetObjectRole ;
     cap:hasAffordance g10:graspingAffordance, g10:stackabilityAffordance ;
     cap:canBeManipulatedBy g10:robotGripper ;
     cap:hasApproxWidth 0.075 .
@@ -111,7 +131,7 @@ g10:pinkCup01
     cap:hasColor "pink" ;
     cap:hasObjectLabel "pink_cup" ;
     cap:hasPoseFrame "world/object_pink_cup" ;
-    cap:hasTaskRole cap:TargetObject ;
+    cap:hasTaskRole g10:targetObjectRole ;
     cap:hasAffordance g10:graspingAffordance, g10:stackabilityAffordance ;
     cap:canBeManipulatedBy g10:robotGripper ;
     cap:hasApproxWidth 0.075 .
@@ -123,7 +143,7 @@ g10:knife01
     cap:hasColor "silver" ;
     cap:hasObjectLabel "knife" ;
     cap:hasPoseFrame "world/object_knife" ;
-    cap:hasTaskRole cap:TargetObject ;
+    cap:hasTaskRole g10:targetObjectRole ;
     cap:hasAffordance g10:graspingAffordance ;
     cap:canBeManipulatedBy g10:robotGripper ;
     cap:hasApproxWidth 0.025 .
@@ -135,7 +155,7 @@ g10:fork01
     cap:hasColor "silver" ;
     cap:hasObjectLabel "fork" ;
     cap:hasPoseFrame "world/object_fork" ;
-    cap:hasTaskRole cap:TargetObject ;
+    cap:hasTaskRole g10:targetObjectRole ;
     cap:hasAffordance g10:graspingAffordance ;
     cap:canBeManipulatedBy g10:robotGripper ;
     cap:hasApproxWidth 0.025 .
@@ -147,7 +167,7 @@ g10:plate01
     cap:hasColor "white" ;
     cap:hasObjectLabel "plate" ;
     cap:hasPoseFrame "world/object_plate" ;
-    cap:hasTaskRole cap:ReferenceObject ;
+    cap:hasTaskRole g10:referenceObjectRole ;
     cap:hasAffordance g10:supportAffordance ;
     cap:hasApproxWidth 0.22 .
 
@@ -158,7 +178,7 @@ g10:block01
     cap:hasColor "red" ;
     cap:hasObjectLabel "toy_block_red" ;
     cap:hasPoseFrame "world/object_block_01" ;
-    cap:hasTaskRole cap:CollectableObject ;
+    cap:hasTaskRole g10:collectableObjectRole ;
     cap:hasAffordance g10:graspingAffordance ;
     cap:canBeManipulatedBy g10:robotGripper ;
     cap:hasApproxWidth 0.035 .
@@ -170,7 +190,7 @@ g10:block02
     cap:hasColor "yellow" ;
     cap:hasObjectLabel "toy_block_yellow" ;
     cap:hasPoseFrame "world/object_block_02" ;
-    cap:hasTaskRole cap:CollectableObject ;
+    cap:hasTaskRole g10:collectableObjectRole ;
     cap:hasAffordance g10:graspingAffordance ;
     cap:canBeManipulatedBy g10:robotGripper ;
     cap:hasApproxWidth 0.035 .
@@ -182,6 +202,6 @@ g10:basket01
     cap:hasColor "green" ;
     cap:hasObjectLabel "basket" ;
     cap:hasPoseFrame "world/object_basket" ;
-    cap:hasTaskRole cap:ContainerTarget ;
+    cap:hasTaskRole g10:containerTargetRole ;
     cap:hasAffordance g10:containmentAffordance ;
     cap:hasApproxWidth 0.30 .

@@ -31,6 +31,14 @@ def test_group_ontology_does_not_assert_graspable_membership() -> None:
     assert asserted_graspable == set()
 
 
+def test_task_role_values_are_group_role_individuals() -> None:
+    graph = parse_turtle(ROOT / "ontology/group-ontology.ttl")
+    role_values = set(graph.objects(None, CAP.hasTaskRole))
+
+    assert role_values
+    assert all(str(role).startswith(str(G10)) for role in role_values)
+
+
 def test_reasoning_script_generates_expected_graspable_objects() -> None:
     subprocess.run(
         [sys.executable, "src/run_reasoning.py"],

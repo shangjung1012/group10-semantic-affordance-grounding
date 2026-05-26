@@ -11,6 +11,7 @@ from rdflib.query import ResultRow
 ROOT = Path(__file__).resolve().parents[1]
 
 COURSE_ONTOLOGY = ROOT / "ontology/imports/course-affordance.ttl"
+COURSE_ALIGNMENT = ROOT / "ontology/imports/course-alignment.ttl"
 GROUP_ONTOLOGY = ROOT / "ontology/group-ontology.ttl"
 INFERRED_RESULTS = ROOT / "ontology/inferred-results.ttl"
 QUERIES = {
@@ -29,6 +30,7 @@ def load_graph() -> Graph:
     graph.bind("rdf", RDF)
     graph.bind("rdfs", RDFS)
     graph.parse(COURSE_ONTOLOGY, format="turtle")
+    graph.parse(COURSE_ALIGNMENT, format="turtle")
     graph.parse(GROUP_ONTOLOGY, format="turtle")
     return graph
 

@@ -6,6 +6,15 @@ WHERE {
   ?obj a cap:GraspableObject .
   FILTER(STRSTARTS(STR(?obj), "https://hcis.io/ontology/aicapstone/2026/group10/"))
   OPTIONAL { ?obj cap:hasObjectLabel ?label . }
-  OPTIONAL { ?obj cap:hasTaskRole ?role . }
+  OPTIONAL {
+    ?obj cap:hasTaskRole ?roleIndividual .
+    VALUES ?role {
+      cap:TargetObject
+      cap:ReferenceObject
+      cap:ContainerTarget
+      cap:CollectableObject
+    }
+    ?roleIndividual a ?role .
+  }
 }
 ORDER BY ?obj
