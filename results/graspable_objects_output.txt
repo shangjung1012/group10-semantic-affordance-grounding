@@ -1,0 +1,8 @@
+obj           | label            | role                 
+--------------+------------------+----------------------
+g10:block01   | toy_block_red    | cap:CollectableObject
+g10:block02   | toy_block_yellow | cap:CollectableObject
+g10:blueCup01 | blue_cup         | cap:TargetObject     
+g10:fork01    | fork             | cap:TargetObject     
+g10:knife01   | knife            | cap:TargetObject     
+g10:pinkCup01 | pink_cup         | cap:TargetObject     

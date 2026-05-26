@@ -1,0 +1,12 @@
+PREFIX cap: <https://hcis.io/ontology/aicapstone/2026/>
+
+SELECT DISTINCT ?obj ?type ?label ?color ?role
+WHERE {
+  VALUES ?type { cap:Cup cap:Knife cap:Fork cap:Plate cap:ToyBlock cap:Basket }
+  ?obj a ?type .
+  FILTER(STRSTARTS(STR(?obj), "https://hcis.io/ontology/aicapstone/2026/group10/"))
+  OPTIONAL { ?obj cap:hasObjectLabel ?label . }
+  OPTIONAL { ?obj cap:hasColor ?color . }
+  OPTIONAL { ?obj cap:hasTaskRole ?role . }
+}
+ORDER BY ?type ?obj

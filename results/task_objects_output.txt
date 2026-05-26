@@ -1,0 +1,10 @@
+obj           | type         | label            | color  | role                 
+--------------+--------------+------------------+--------+----------------------
+g10:basket01  | cap:Basket   | basket           | green  | cap:ContainerTarget  
+g10:blueCup01 | cap:Cup      | blue_cup         | blue   | cap:TargetObject     
+g10:pinkCup01 | cap:Cup      | pink_cup         | pink   | cap:TargetObject     
+g10:fork01    | cap:Fork     | fork             | silver | cap:TargetObject     
+g10:knife01   | cap:Knife    | knife            | silver | cap:TargetObject     
+g10:plate01   | cap:Plate    | plate            | white  | cap:ReferenceObject  
+g10:block01   | cap:ToyBlock | toy_block_red    | red    | cap:CollectableObject
+g10:block02   | cap:ToyBlock | toy_block_yellow | yellow | cap:CollectableObject

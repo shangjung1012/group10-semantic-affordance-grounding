@@ -1,0 +1,115 @@
+# Group 10 Semantic Affordance Grounding
+
+Homework 5 submission for AI Capstone 2026. This project builds a compact ontology layer for grounding baseline task objects and inferring which objects are graspable by a robot gripper.
+
+## Group Members
+
+Group 10
+
+## Selected Tasks
+
+This submission models all baseline Homework 5 tasks:
+
+- Cup stacking: blue cup and pink cup
+- Cutlery arrangement: knife, fork, and plate
+- Toy block collection: toy blocks and basket
+
+## Repository Structure
+
+```text
+.
+|-- README.md
+|-- report.md
+|-- ontology/
+|   |-- group-ontology.ttl
+|   |-- inferred-results.ttl
+|   `-- imports/
+|       |-- course-affordance.ttl
+|       `-- course-alignment.ttl
+|-- queries/
+|   |-- graspable_objects.rq
+|   `-- task_objects.rq
+|-- results/
+|   |-- graspable_objects_output.txt
+|   `-- task_objects_output.txt
+|-- src/
+|   `-- run_reasoning.py
+|-- tests/
+|   `-- test_hw5_workflow.py
+|-- pyproject.toml
+`-- uv.lock
+```
+
+`ontology/group-ontology.ttl` is the Group 10 authored ontology. Files under `ontology/imports/` are imported course resources. The copied `course-affordance.ttl` contains a minimal Turtle syntax repair for the misplaced `cap:hasApproxWidth` label/comment so local RDF parsers can load it.
+
+## Namespace Policy
+
+- Course vocabulary: `cap: <https://hcis.io/ontology/aicapstone/2026/>`
+- Group 10 vocabulary and instances: `g10: <https://hcis.io/ontology/aicapstone/2026/group10/>`
+
+Shared classes and properties such as `cap:Cup`, `cap:hasAffordance`, and `cap:GraspableObject` use the `cap:` namespace. Group-specific individuals such as `g10:blueCup01` use the `g10:` namespace.
+
+## Ontology Design
+
+The ontology separates object type, task role, affordance, and instance. Graspability is inferred from the pattern:
+
+```text
+cap:PhysicalObject and hasAffordance some cap:GraspingAffordance
+```
+
+The group ontology defines the formal `cap:GraspableObject` class axiom because the provided starter ontology documents the term but does not include the full OWL class definition.
+
+| Object | Type | Role | Affordance | Graspable result |
+| --- | --- | --- | --- | --- |
+| `g10:blueCup01` | `cap:Cup` | `cap:TargetObject` | grasping, stackability | inferred |
+| `g10:pinkCup01` | `cap:Cup` | `cap:TargetObject` | grasping, stackability | inferred |
+| `g10:knife01` | `cap:Knife` | `cap:TargetObject` | grasping | inferred |
+| `g10:fork01` | `cap:Fork` | `cap:TargetObject` | grasping | inferred |
+| `g10:plate01` | `cap:Plate` | `cap:ReferenceObject` | support | not inferred |
+| `g10:block01` | `cap:ToyBlock` | `cap:CollectableObject` | grasping | inferred |
+| `g10:block02` | `cap:ToyBlock` | `cap:CollectableObject` | grasping | inferred |
+| `g10:basket01` | `cap:Basket` | `cap:ContainerTarget` | containment | not inferred |
+
+Plate and basket are task-relevant but are not modeled as direct grasp targets in this baseline submission.
+
+## Running Locally
+
+This project uses `uv`.
+
+```bash
+uv sync
+uv run python src/run_reasoning.py
+```
+
+The script writes:
+
+- `ontology/inferred-results.ttl`
+- `results/graspable_objects_output.txt`
+- `results/task_objects_output.txt`
+
+Run verification tests with:
+
+```bash
+uv run pytest
+```
+
+## Expected Graspable Query Output
+
+`queries/graspable_objects.rq` runs over the inferred graph and should return:
+
+```text
+g10:block01
+g10:block02
+g10:blueCup01
+g10:fork01
+g10:knife01
+g10:pinkCup01
+```
+
+The query output is saved in `results/graspable_objects_output.txt`.
+
+## What Is Inferred
+
+The group ontology does not manually assert Group 10 objects as `cap:GraspableObject`. Instead, `src/run_reasoning.py` loads the course and group ontologies, applies OWL/RDFS closure with `owlrl`, then materializes the assignment-specific rule: a physical object with a grasping affordance is typed as `cap:GraspableObject`.
+
+This produces inferred graspable memberships for cups, knife, fork, and toy blocks. Plate and basket remain outside the graspable result because their asserted affordances are support and containment, respectively.

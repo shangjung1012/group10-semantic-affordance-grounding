@@ -199,6 +199,9 @@ cap:hasApproxWidth
     a owl:DatatypeProperty ;
     rdfs:domain cap:PhysicalObject ;
     rdfs:range xsd:decimal ;
+    rdfs:label "has approximate width"@en ;
+    rdfs:comment
+        "Records an approximate object width, which may be useful for checking whether an object fits within a gripper capability."@en .
 
 # Course Objects
 
@@ -278,6 +281,3 @@ cap:Basket
         owl:onProperty cap:hasAffordance ;
         owl:someValuesFrom cap:ContainmentAffordance
     ] .
-    rdfs:label "has approximate width"@en ;
-    rdfs:comment
-        "Records an approximate object width, which may be useful for checking whether an object fits within a gripper capability."@en .

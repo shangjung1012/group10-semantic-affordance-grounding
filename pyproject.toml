@@ -1,0 +1,18 @@
+[project]
+name = "group10-semantic-affordance-grounding"
+version = "0.1.0"
+description = "Group 10 ontology-based semantic grounding workflow for AI Capstone HW5."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "owlrl>=7.1.4",
+    "rdflib>=7.1.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
