@@ -5,6 +5,7 @@ from typing import Iterable
 
 from owlrl import DeductiveClosure, OWLRL_Semantics
 from rdflib import Graph, Namespace, RDF, RDFS, URIRef
+from rdflib.compare import to_canonical_graph
 from rdflib.query import ResultRow
 
 
@@ -106,10 +107,18 @@ def write_query_outputs(graph: Graph) -> None:
         output_path.write_text(format_rows(graph, result, variables))
 
 
+def serialize_inferred_graph(graph: Graph) -> None:
+    canonical_graph = Graph()
+    for prefix, namespace in graph.namespaces():
+        canonical_graph.bind(prefix, namespace)
+    canonical_graph += to_canonical_graph(graph)
+    canonical_graph.serialize(destination=INFERRED_RESULTS, format="turtle")
+
+
 def main() -> None:
     graph = run_reasoning(load_graph())
     INFERRED_RESULTS.parent.mkdir(parents=True, exist_ok=True)
-    graph.serialize(destination=INFERRED_RESULTS, format="turtle")
+    serialize_inferred_graph(graph)
     write_query_outputs(graph)
     print(f"Wrote {INFERRED_RESULTS.relative_to(ROOT)}")
     for output_path in QUERIES.values():

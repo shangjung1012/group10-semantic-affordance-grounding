@@ -85,3 +85,22 @@ def test_saved_graspable_output_matches_expected_objects() -> None:
 
     assert "plate01" not in output
     assert "basket01" not in output
+
+
+def test_reasoning_output_is_stable_across_runs() -> None:
+    first_output = None
+
+    for run_index in range(2):
+        subprocess.run(
+            [sys.executable, "src/run_reasoning.py"],
+            cwd=ROOT,
+            check=True,
+            text=True,
+            capture_output=True,
+        )
+        current_output = (ROOT / "ontology/inferred-results.ttl").read_text()
+
+        if run_index == 0:
+            first_output = current_output
+
+    assert current_output == first_output
