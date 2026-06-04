@@ -1,0 +1,511 @@
+[ {
+  "@id" : "_:genid1",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2002/07/owl#intersectionOf" : [ {
+    "@list" : [ {
+      "@id" : "https://hcis.io/ontology/aicapstone/2026/PhysicalObject"
+    }, {
+      "@id" : "_:genid3"
+    } ]
+  } ]
+}, {
+  "@id" : "_:genid3",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Restriction" ],
+  "http://www.w3.org/2002/07/owl#onProperty" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/hasAffordance"
+  } ],
+  "http://www.w3.org/2002/07/owl#someValuesFrom" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/GraspingAffordance"
+  } ]
+}, {
+  "@id" : "http://xmlns.com/foaf/0.1/Group",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/GraspableObject",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Class" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A physical object inferred to afford grasping by the robot gripper in the task context."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "graspable object"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#subClassOf" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/PhysicalObject"
+  } ],
+  "http://www.w3.org/2002/07/owl#equivalentClass" : [ {
+    "@id" : "_:genid1"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10",
+  "@type" : [ "http://www.w3.org/2002/07/owl#Ontology" ],
+  "http://purl.org/dc/terms/created" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#date",
+    "@value" : "2026-05-26"
+  } ],
+  "http://purl.org/dc/terms/creator" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/group10"
+  } ],
+  "http://purl.org/dc/terms/description" : [ {
+    "@language" : "en",
+    "@value" : "This ontology defines Group 10 object instances, task roles, affordance individuals, and the graspable-object reasoning axiom used for Homework 5."
+  } ],
+  "http://purl.org/dc/terms/license" : [ {
+    "@id" : "https://creativecommons.org/licenses/by/4.0/"
+  } ],
+  "http://purl.org/dc/terms/title" : [ {
+    "@language" : "en",
+    "@value" : "Group 10 Semantic Affordance Grounding Ontology"
+  } ],
+  "http://purl.org/vocab/vann/preferredNamespacePrefix" : [ {
+    "@value" : "g10"
+  } ],
+  "http://purl.org/vocab/vann/preferredNamespaceUri" : [ {
+    "@value" : "https://hcis.io/ontology/aicapstone/2026/group10/"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "Group 10 ontology for grounding baseline AI Capstone task objects and inferring graspable objects from grasping affordances."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "Group 10 Semantic Affordance Grounding Ontology"
+  } ],
+  "http://www.w3.org/2002/07/owl#imports" : [ {
+    "@id" : "file:/home/shangjung/Documents/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/basket01",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/Basket" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The basket instance modeled by Group 10 as the container target for toy block collection; it is not a direct grasp target in this baseline model."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "basket 01"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasAffordance" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/containmentAffordance"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasApproxWidth" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "0.30"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasColor" : [ {
+    "@value" : "green"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasObjectLabel" : [ {
+    "@value" : "basket"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasPoseFrame" : [ {
+    "@value" : "world/object_basket"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasTaskRole" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/containerTargetRole"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/block01",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/ToyBlock" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The first toy block instance modeled by Group 10 as a collectable grasp target."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "toy block 01"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/robotGripper"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasAffordance" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasApproxWidth" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "0.035"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasColor" : [ {
+    "@value" : "red"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasObjectLabel" : [ {
+    "@value" : "toy_block_red"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasPoseFrame" : [ {
+    "@value" : "world/object_block_01"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasTaskRole" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/collectableObjectRole"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/block02",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/ToyBlock" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The second toy block instance modeled by Group 10 as a collectable grasp target."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "toy block 02"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/robotGripper"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasAffordance" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasApproxWidth" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "0.035"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasColor" : [ {
+    "@value" : "yellow"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasObjectLabel" : [ {
+    "@value" : "toy_block_yellow"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasPoseFrame" : [ {
+    "@value" : "world/object_block_02"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasTaskRole" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/collectableObjectRole"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/blueCup01",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/Cup" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The blue cup instance modeled by Group 10 for the baseline cup-stacking task."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "blue cup 01"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/robotGripper"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasAffordance" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance"
+  }, {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/stackabilityAffordance"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasApproxWidth" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "0.075"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasColor" : [ {
+    "@value" : "blue"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasObjectLabel" : [ {
+    "@value" : "blue_cup"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasPoseFrame" : [ {
+    "@value" : "world/object_blue_cup"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasTaskRole" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/targetObjectRole"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/collectableObjectRole",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/CollectableObject" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A reusable Group 10 role individual for objects collected into another object or location."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "collectable object role"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/containerTargetRole",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/ContainerTarget" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A reusable Group 10 role individual for objects that receive or contain other objects."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "container target role"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/containmentAffordance",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/ContainmentAffordance" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A reusable affordance individual indicating that a container can receive collectable objects."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "containment affordance"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/cupStackingTask",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/ManipulationTask" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The baseline task in which the blue and pink cups are manipulation targets."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "cup stacking task"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasTargetObject" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/blueCup01"
+  }, {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/pinkCup01"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/cutleryArrangementTask",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/ManipulationTask" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The baseline task in which the knife and fork are arranged with respect to the plate."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "cutlery arrangement task"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasReferenceObject" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/plate01"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasTargetObject" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/fork01"
+  }, {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/knife01"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/fork01",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/Fork" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The fork instance modeled by Group 10 as a direct manipulation target in the cutlery-arrangement task."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "fork 01"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/robotGripper"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasAffordance" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasApproxWidth" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "0.025"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasColor" : [ {
+    "@value" : "silver"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasObjectLabel" : [ {
+    "@value" : "fork"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasPoseFrame" : [ {
+    "@value" : "world/object_fork"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasTaskRole" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/targetObjectRole"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/GraspingAffordance" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A reusable Group 10 affordance individual indicating that an object can be grasped by the robot gripper."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "grasping affordance"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/group10",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual" ],
+  "http://www.w3.org/1999/02/22-rdf-syntax-ns#type" : [ {
+    "@id" : "http://xmlns.com/foaf/0.1/Group"
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The AI Capstone group responsible for this Homework 5 ontology submission."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "Group 10"
+  } ],
+  "http://xmlns.com/foaf/0.1/name" : [ {
+    "@language" : "en",
+    "@value" : "Group 10"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/knife01",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/Knife" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The knife instance modeled by Group 10 as a direct manipulation target in the cutlery-arrangement task."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "knife 01"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/robotGripper"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasAffordance" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasApproxWidth" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "0.025"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasColor" : [ {
+    "@value" : "silver"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasObjectLabel" : [ {
+    "@value" : "knife"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasPoseFrame" : [ {
+    "@value" : "world/object_knife"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasTaskRole" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/targetObjectRole"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/pinkCup01",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/Cup" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The pink cup instance modeled by Group 10 for the baseline cup-stacking task."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "pink cup 01"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/robotGripper"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasAffordance" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance"
+  }, {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/stackabilityAffordance"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasApproxWidth" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "0.075"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasColor" : [ {
+    "@value" : "pink"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasObjectLabel" : [ {
+    "@value" : "pink_cup"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasPoseFrame" : [ {
+    "@value" : "world/object_pink_cup"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasTaskRole" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/targetObjectRole"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/plate01",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/Plate" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The plate instance modeled by Group 10 as the reference object for arranging cutlery; it is not a direct grasp target in this baseline model."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "plate 01"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasAffordance" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/supportAffordance"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasApproxWidth" : [ {
+    "@type" : "http://www.w3.org/2001/XMLSchema#decimal",
+    "@value" : "0.22"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasColor" : [ {
+    "@value" : "white"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasObjectLabel" : [ {
+    "@value" : "plate"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasPoseFrame" : [ {
+    "@value" : "world/object_plate"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasTaskRole" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/referenceObjectRole"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/referenceObjectRole",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/ReferenceObject" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A reusable Group 10 role individual for objects used as spatial or semantic references."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "reference object role"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/robotGripper",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/EndEffector" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The simplified gripper end effector used by Group 10 for graspability reasoning."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "robot gripper"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/stackabilityAffordance",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/StackabilityAffordance" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A reusable affordance individual indicating that a cup can participate in the cup-stacking task."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "stackability affordance"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/supportAffordance",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/SupportAffordance" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A reusable affordance individual indicating that an object can support placement or arrangement of other objects."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "support affordance"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/targetObjectRole",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/TargetObject" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "A reusable Group 10 role individual for objects that are directly manipulated in a task."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "target object role"
+  } ]
+}, {
+  "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/toyBlockCollectionTask",
+  "@type" : [ "http://www.w3.org/2002/07/owl#NamedIndividual", "https://hcis.io/ontology/aicapstone/2026/ManipulationTask" ],
+  "http://www.w3.org/2000/01/rdf-schema#comment" : [ {
+    "@language" : "en",
+    "@value" : "The baseline task in which toy blocks are collected into the basket."
+  } ],
+  "http://www.w3.org/2000/01/rdf-schema#label" : [ {
+    "@language" : "en",
+    "@value" : "toy block collection task"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasReferenceObject" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/basket01"
+  } ],
+  "https://hcis.io/ontology/aicapstone/2026/hasTargetObject" : [ {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/block01"
+  }, {
+    "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/block02"
+  } ]
+} ]

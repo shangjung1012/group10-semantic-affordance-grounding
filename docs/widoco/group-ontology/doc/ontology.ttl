@@ -1,0 +1,260 @@
+@prefix : <https://hcis.io/ontology/aicapstone/2026/group10#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://hcis.io/ontology/aicapstone/2026/group10#> .
+
+<https://hcis.io/ontology/aicapstone/2026/group10> rdf:type owl:Ontology ;
+                                                    owl:imports <file:/home/shangjung/Documents/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> ;
+                                                    <http://purl.org/dc/terms/created> "2026-05-26"^^xsd:date ;
+                                                    <http://purl.org/dc/terms/creator> <https://hcis.io/ontology/aicapstone/2026/group10/group10> ;
+                                                    <http://purl.org/dc/terms/description> "This ontology defines Group 10 object instances, task roles, affordance individuals, and the graspable-object reasoning axiom used for Homework 5."@en ;
+                                                    <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by/4.0/> ;
+                                                    <http://purl.org/dc/terms/title> "Group 10 Semantic Affordance Grounding Ontology"@en ;
+                                                    <http://purl.org/vocab/vann/preferredNamespacePrefix> "g10" ;
+                                                    <http://purl.org/vocab/vann/preferredNamespaceUri> "https://hcis.io/ontology/aicapstone/2026/group10/" ;
+                                                    rdfs:comment "Group 10 ontology for grounding baseline AI Capstone task objects and inferring graspable objects from grasping affordances."@en ;
+                                                    rdfs:label "Group 10 Semantic Affordance Grounding Ontology"@en .
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://xmlns.com/foaf/0.1/Group
+<http://xmlns.com/foaf/0.1/Group> rdf:type owl:Class .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/GraspableObject
+<https://hcis.io/ontology/aicapstone/2026/GraspableObject> rdf:type owl:Class ;
+                                                           owl:equivalentClass [ owl:intersectionOf ( <https://hcis.io/ontology/aicapstone/2026/PhysicalObject>
+                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                        owl:onProperty <https://hcis.io/ontology/aicapstone/2026/hasAffordance> ;
+                                                                                                        owl:someValuesFrom <https://hcis.io/ontology/aicapstone/2026/GraspingAffordance>
+                                                                                                      ]
+                                                                                                    ) ;
+                                                                                 rdf:type owl:Class
+                                                                               ] ;
+                                                           rdfs:subClassOf <https://hcis.io/ontology/aicapstone/2026/PhysicalObject> ;
+                                                           rdfs:comment "A physical object inferred to afford grasping by the robot gripper in the task context."@en ;
+                                                           rdfs:label "graspable object"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/basket01
+<https://hcis.io/ontology/aicapstone/2026/group10/basket01> rdf:type owl:NamedIndividual ,
+                                                                     <https://hcis.io/ontology/aicapstone/2026/Basket> ;
+                                                            <https://hcis.io/ontology/aicapstone/2026/hasAffordance> <https://hcis.io/ontology/aicapstone/2026/group10/containmentAffordance> ;
+                                                            <https://hcis.io/ontology/aicapstone/2026/hasTaskRole> <https://hcis.io/ontology/aicapstone/2026/group10/containerTargetRole> ;
+                                                            <https://hcis.io/ontology/aicapstone/2026/hasApproxWidth> 0.30 ;
+                                                            <https://hcis.io/ontology/aicapstone/2026/hasColor> "green" ;
+                                                            <https://hcis.io/ontology/aicapstone/2026/hasObjectLabel> "basket" ;
+                                                            <https://hcis.io/ontology/aicapstone/2026/hasPoseFrame> "world/object_basket" ;
+                                                            rdfs:comment "The basket instance modeled by Group 10 as the container target for toy block collection; it is not a direct grasp target in this baseline model."@en ;
+                                                            rdfs:label "basket 01"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/block01
+<https://hcis.io/ontology/aicapstone/2026/group10/block01> rdf:type owl:NamedIndividual ,
+                                                                    <https://hcis.io/ontology/aicapstone/2026/ToyBlock> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy> <https://hcis.io/ontology/aicapstone/2026/group10/robotGripper> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasAffordance> <https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasTaskRole> <https://hcis.io/ontology/aicapstone/2026/group10/collectableObjectRole> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasApproxWidth> 0.035 ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasColor> "red" ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasObjectLabel> "toy_block_red" ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasPoseFrame> "world/object_block_01" ;
+                                                           rdfs:comment "The first toy block instance modeled by Group 10 as a collectable grasp target."@en ;
+                                                           rdfs:label "toy block 01"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/block02
+<https://hcis.io/ontology/aicapstone/2026/group10/block02> rdf:type owl:NamedIndividual ,
+                                                                    <https://hcis.io/ontology/aicapstone/2026/ToyBlock> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy> <https://hcis.io/ontology/aicapstone/2026/group10/robotGripper> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasAffordance> <https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasTaskRole> <https://hcis.io/ontology/aicapstone/2026/group10/collectableObjectRole> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasApproxWidth> 0.035 ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasColor> "yellow" ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasObjectLabel> "toy_block_yellow" ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasPoseFrame> "world/object_block_02" ;
+                                                           rdfs:comment "The second toy block instance modeled by Group 10 as a collectable grasp target."@en ;
+                                                           rdfs:label "toy block 02"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/blueCup01
+<https://hcis.io/ontology/aicapstone/2026/group10/blueCup01> rdf:type owl:NamedIndividual ,
+                                                                      <https://hcis.io/ontology/aicapstone/2026/Cup> ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy> <https://hcis.io/ontology/aicapstone/2026/group10/robotGripper> ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasAffordance> <https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance> ,
+                                                                                                                      <https://hcis.io/ontology/aicapstone/2026/group10/stackabilityAffordance> ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasTaskRole> <https://hcis.io/ontology/aicapstone/2026/group10/targetObjectRole> ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasApproxWidth> 0.075 ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasColor> "blue" ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasObjectLabel> "blue_cup" ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasPoseFrame> "world/object_blue_cup" ;
+                                                             rdfs:comment "The blue cup instance modeled by Group 10 for the baseline cup-stacking task."@en ;
+                                                             rdfs:label "blue cup 01"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/collectableObjectRole
+<https://hcis.io/ontology/aicapstone/2026/group10/collectableObjectRole> rdf:type owl:NamedIndividual ,
+                                                                                  <https://hcis.io/ontology/aicapstone/2026/CollectableObject> ;
+                                                                         rdfs:comment "A reusable Group 10 role individual for objects collected into another object or location."@en ;
+                                                                         rdfs:label "collectable object role"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/containerTargetRole
+<https://hcis.io/ontology/aicapstone/2026/group10/containerTargetRole> rdf:type owl:NamedIndividual ,
+                                                                                <https://hcis.io/ontology/aicapstone/2026/ContainerTarget> ;
+                                                                       rdfs:comment "A reusable Group 10 role individual for objects that receive or contain other objects."@en ;
+                                                                       rdfs:label "container target role"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/containmentAffordance
+<https://hcis.io/ontology/aicapstone/2026/group10/containmentAffordance> rdf:type owl:NamedIndividual ,
+                                                                                  <https://hcis.io/ontology/aicapstone/2026/ContainmentAffordance> ;
+                                                                         rdfs:comment "A reusable affordance individual indicating that a container can receive collectable objects."@en ;
+                                                                         rdfs:label "containment affordance"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/cupStackingTask
+<https://hcis.io/ontology/aicapstone/2026/group10/cupStackingTask> rdf:type owl:NamedIndividual ,
+                                                                            <https://hcis.io/ontology/aicapstone/2026/ManipulationTask> ;
+                                                                   <https://hcis.io/ontology/aicapstone/2026/hasTargetObject> <https://hcis.io/ontology/aicapstone/2026/group10/blueCup01> ,
+                                                                                                                              <https://hcis.io/ontology/aicapstone/2026/group10/pinkCup01> ;
+                                                                   rdfs:comment "The baseline task in which the blue and pink cups are manipulation targets."@en ;
+                                                                   rdfs:label "cup stacking task"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/cutleryArrangementTask
+<https://hcis.io/ontology/aicapstone/2026/group10/cutleryArrangementTask> rdf:type owl:NamedIndividual ,
+                                                                                   <https://hcis.io/ontology/aicapstone/2026/ManipulationTask> ;
+                                                                          <https://hcis.io/ontology/aicapstone/2026/hasReferenceObject> <https://hcis.io/ontology/aicapstone/2026/group10/plate01> ;
+                                                                          <https://hcis.io/ontology/aicapstone/2026/hasTargetObject> <https://hcis.io/ontology/aicapstone/2026/group10/fork01> ,
+                                                                                                                                     <https://hcis.io/ontology/aicapstone/2026/group10/knife01> ;
+                                                                          rdfs:comment "The baseline task in which the knife and fork are arranged with respect to the plate."@en ;
+                                                                          rdfs:label "cutlery arrangement task"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/fork01
+<https://hcis.io/ontology/aicapstone/2026/group10/fork01> rdf:type owl:NamedIndividual ,
+                                                                   <https://hcis.io/ontology/aicapstone/2026/Fork> ;
+                                                          <https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy> <https://hcis.io/ontology/aicapstone/2026/group10/robotGripper> ;
+                                                          <https://hcis.io/ontology/aicapstone/2026/hasAffordance> <https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance> ;
+                                                          <https://hcis.io/ontology/aicapstone/2026/hasTaskRole> <https://hcis.io/ontology/aicapstone/2026/group10/targetObjectRole> ;
+                                                          <https://hcis.io/ontology/aicapstone/2026/hasApproxWidth> 0.025 ;
+                                                          <https://hcis.io/ontology/aicapstone/2026/hasColor> "silver" ;
+                                                          <https://hcis.io/ontology/aicapstone/2026/hasObjectLabel> "fork" ;
+                                                          <https://hcis.io/ontology/aicapstone/2026/hasPoseFrame> "world/object_fork" ;
+                                                          rdfs:comment "The fork instance modeled by Group 10 as a direct manipulation target in the cutlery-arrangement task."@en ;
+                                                          rdfs:label "fork 01"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance
+<https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance> rdf:type owl:NamedIndividual ,
+                                                                               <https://hcis.io/ontology/aicapstone/2026/GraspingAffordance> ;
+                                                                      rdfs:comment "A reusable Group 10 affordance individual indicating that an object can be grasped by the robot gripper."@en ;
+                                                                      rdfs:label "grasping affordance"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/group10
+<https://hcis.io/ontology/aicapstone/2026/group10/group10> rdf:type owl:NamedIndividual ,
+                                                                    <http://xmlns.com/foaf/0.1/Group> ;
+                                                           rdfs:comment "The AI Capstone group responsible for this Homework 5 ontology submission."@en ;
+                                                           rdfs:label "Group 10"@en ;
+                                                           <http://xmlns.com/foaf/0.1/name> "Group 10"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/knife01
+<https://hcis.io/ontology/aicapstone/2026/group10/knife01> rdf:type owl:NamedIndividual ,
+                                                                    <https://hcis.io/ontology/aicapstone/2026/Knife> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy> <https://hcis.io/ontology/aicapstone/2026/group10/robotGripper> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasAffordance> <https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasTaskRole> <https://hcis.io/ontology/aicapstone/2026/group10/targetObjectRole> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasApproxWidth> 0.025 ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasColor> "silver" ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasObjectLabel> "knife" ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasPoseFrame> "world/object_knife" ;
+                                                           rdfs:comment "The knife instance modeled by Group 10 as a direct manipulation target in the cutlery-arrangement task."@en ;
+                                                           rdfs:label "knife 01"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/pinkCup01
+<https://hcis.io/ontology/aicapstone/2026/group10/pinkCup01> rdf:type owl:NamedIndividual ,
+                                                                      <https://hcis.io/ontology/aicapstone/2026/Cup> ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/canBeManipulatedBy> <https://hcis.io/ontology/aicapstone/2026/group10/robotGripper> ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasAffordance> <https://hcis.io/ontology/aicapstone/2026/group10/graspingAffordance> ,
+                                                                                                                      <https://hcis.io/ontology/aicapstone/2026/group10/stackabilityAffordance> ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasTaskRole> <https://hcis.io/ontology/aicapstone/2026/group10/targetObjectRole> ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasApproxWidth> 0.075 ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasColor> "pink" ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasObjectLabel> "pink_cup" ;
+                                                             <https://hcis.io/ontology/aicapstone/2026/hasPoseFrame> "world/object_pink_cup" ;
+                                                             rdfs:comment "The pink cup instance modeled by Group 10 for the baseline cup-stacking task."@en ;
+                                                             rdfs:label "pink cup 01"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/plate01
+<https://hcis.io/ontology/aicapstone/2026/group10/plate01> rdf:type owl:NamedIndividual ,
+                                                                    <https://hcis.io/ontology/aicapstone/2026/Plate> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasAffordance> <https://hcis.io/ontology/aicapstone/2026/group10/supportAffordance> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasTaskRole> <https://hcis.io/ontology/aicapstone/2026/group10/referenceObjectRole> ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasApproxWidth> 0.22 ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasColor> "white" ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasObjectLabel> "plate" ;
+                                                           <https://hcis.io/ontology/aicapstone/2026/hasPoseFrame> "world/object_plate" ;
+                                                           rdfs:comment "The plate instance modeled by Group 10 as the reference object for arranging cutlery; it is not a direct grasp target in this baseline model."@en ;
+                                                           rdfs:label "plate 01"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/referenceObjectRole
+<https://hcis.io/ontology/aicapstone/2026/group10/referenceObjectRole> rdf:type owl:NamedIndividual ,
+                                                                                <https://hcis.io/ontology/aicapstone/2026/ReferenceObject> ;
+                                                                       rdfs:comment "A reusable Group 10 role individual for objects used as spatial or semantic references."@en ;
+                                                                       rdfs:label "reference object role"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/robotGripper
+<https://hcis.io/ontology/aicapstone/2026/group10/robotGripper> rdf:type owl:NamedIndividual ,
+                                                                         <https://hcis.io/ontology/aicapstone/2026/EndEffector> ;
+                                                                rdfs:comment "The simplified gripper end effector used by Group 10 for graspability reasoning."@en ;
+                                                                rdfs:label "robot gripper"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/stackabilityAffordance
+<https://hcis.io/ontology/aicapstone/2026/group10/stackabilityAffordance> rdf:type owl:NamedIndividual ,
+                                                                                   <https://hcis.io/ontology/aicapstone/2026/StackabilityAffordance> ;
+                                                                          rdfs:comment "A reusable affordance individual indicating that a cup can participate in the cup-stacking task."@en ;
+                                                                          rdfs:label "stackability affordance"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/supportAffordance
+<https://hcis.io/ontology/aicapstone/2026/group10/supportAffordance> rdf:type owl:NamedIndividual ,
+                                                                              <https://hcis.io/ontology/aicapstone/2026/SupportAffordance> ;
+                                                                     rdfs:comment "A reusable affordance individual indicating that an object can support placement or arrangement of other objects."@en ;
+                                                                     rdfs:label "support affordance"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/targetObjectRole
+<https://hcis.io/ontology/aicapstone/2026/group10/targetObjectRole> rdf:type owl:NamedIndividual ,
+                                                                             <https://hcis.io/ontology/aicapstone/2026/TargetObject> ;
+                                                                    rdfs:comment "A reusable Group 10 role individual for objects that are directly manipulated in a task."@en ;
+                                                                    rdfs:label "target object role"@en .
+
+
+###  https://hcis.io/ontology/aicapstone/2026/group10/toyBlockCollectionTask
+<https://hcis.io/ontology/aicapstone/2026/group10/toyBlockCollectionTask> rdf:type owl:NamedIndividual ,
+                                                                                   <https://hcis.io/ontology/aicapstone/2026/ManipulationTask> ;
+                                                                          <https://hcis.io/ontology/aicapstone/2026/hasReferenceObject> <https://hcis.io/ontology/aicapstone/2026/group10/basket01> ;
+                                                                          <https://hcis.io/ontology/aicapstone/2026/hasTargetObject> <https://hcis.io/ontology/aicapstone/2026/group10/block01> ,
+                                                                                                                                     <https://hcis.io/ontology/aicapstone/2026/group10/block02> ;
+                                                                          rdfs:comment "The baseline task in which toy blocks are collected into the basket."@en ;
+                                                                          rdfs:label "toy block collection task"@en .
+
+
+###  Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/

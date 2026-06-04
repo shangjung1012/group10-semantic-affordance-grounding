@@ -1,0 +1,11 @@
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix : <> .
+<..\index-en.html> a prov:Entity;
+	 dc:title "Group 10 Semantic Affordance Grounding Ontology";
+	 prov:wasAttributedTo <https://hcis.io/ontology/aicapstone/2026/group10/group10>;
+	 dc:creator <https://hcis.io/ontology/aicapstone/2026/group10/group10>;
+	 prov:wasAttributedTo <https://github.com/dgarijo/Widoco/>,<http://www.essepuntato.it/lode/>;
+	 prov:wasGeneratedAt "2026-05-26";
+.
