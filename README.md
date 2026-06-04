@@ -7,10 +7,17 @@ Repository link: <https://github.com/shangjung1012/group10-semantic-affordance-g
 ## Group Members
 
 - 蔡尚融
+- 江品寬
+- 胡占祥
+- 楊晟弘
+- 林辰翰
+- 李冠緯
 
-## Selected Tasks
+## Selected Task
 
-This submission models all baseline Homework 5 tasks:
+Our group's final project task is toy block collection.
+
+For Homework 5, this submission also includes the required baseline object vocabulary and instances from all three predefined course tasks:
 
 - Cup stacking: blue cup and pink cup
 - Cutlery arrangement: knife, fork, and plate
@@ -96,6 +103,10 @@ Run verification tests with:
 ```bash
 uv run pytest
 ```
+
+## Widoco Documentation Check
+
+Widoco 1.4.25 was run on `ontology/group-ontology.ttl` as an ontology documentation check. The documentation was generated successfully under `docs/widoco/group-ontology/doc/index-en.html`, and it lists the ontology metadata, imported course ontology, `cap:GraspableObject` equivalent-class axiom, and modeled task-object individuals.
 
 ## Expected Graspable Query Output
 

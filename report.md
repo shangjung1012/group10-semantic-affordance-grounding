@@ -1,12 +1,14 @@
 # Report: Group 10 Semantic Affordance Grounding
 
-Group member: 蔡尚融
+Group members: 蔡尚融, 江品寬, 胡占祥, 楊晟弘, 林辰翰, 李冠緯
 
 Repository link: <https://github.com/shangjung1012/group10-semantic-affordance-grounding>
 
 ## Overview
 
 This repository implements Homework 5: Ontology-based Semantic Grounding. The goal is to model task objects from the AI Capstone baseline tasks and infer which objects are graspable by a robot gripper.
+
+The group's final project task is toy block collection. For Homework 5, the ontology also includes the required baseline object vocabulary and instances from cup stacking, cutlery arrangement, and toy block collection.
 
 The submission uses a Python workflow managed by `uv`. RDF parsing and SPARQL queries are handled by RDFLib, and OWL/RDFS closure is handled by `owlrl`.
 
@@ -122,6 +124,8 @@ uv run pytest
 ```
 
 The tests verify that Turtle files parse, graspable membership is not manually asserted for Group 10 instances, expected objects are inferred as graspable, and saved query output matches the expected result.
+
+Widoco 1.4.25 was also run on `ontology/group-ontology.ttl` as an ontology documentation check. The generated documentation is available under `docs/widoco/group-ontology/doc/index-en.html` and lists the ontology metadata, imported course ontology, `cap:GraspableObject` equivalent-class axiom, and modeled task-object individuals.
 
 ## Limitations
 
