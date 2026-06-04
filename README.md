@@ -49,7 +49,19 @@ For Homework 5, this submission also includes the required baseline object vocab
 `-- uv.lock
 ```
 
-`ontology/group-ontology.ttl` is the Group 10 authored ontology. Files under `ontology/imports/` are imported course resources. The copied `course-affordance.ttl` contains a minimal Turtle syntax repair for the misplaced `cap:hasApproxWidth` label/comment so local RDF parsers can load it.
+`ontology/group-ontology.ttl` is the Group 10 authored ontology. Files under `ontology/imports/` are copied course starter resources and are treated as imported dependencies, not as Group 10 authored ontology files.
+
+## Key File Links
+
+- Group ontology: [`ontology/group-ontology.ttl`](ontology/group-ontology.ttl)
+- Inferred graph: [`ontology/inferred-results.ttl`](ontology/inferred-results.ttl)
+- Course imports: [`ontology/imports/course-affordance.ttl`](ontology/imports/course-affordance.ttl), [`ontology/imports/course-alignment.ttl`](ontology/imports/course-alignment.ttl)
+- Required query: [`queries/graspable_objects.rq`](queries/graspable_objects.rq)
+- Additional query: [`queries/task_objects.rq`](queries/task_objects.rq)
+- Reasoning workflow: [`src/run_reasoning.py`](src/run_reasoning.py)
+- Query outputs: [`results/graspable_objects_output.txt`](results/graspable_objects_output.txt), [`results/task_objects_output.txt`](results/task_objects_output.txt)
+- Report: [`report.md`](report.md)
+- Widoco documentation: [`docs/widoco/group-ontology/doc/index-en.html`](docs/widoco/group-ontology/doc/index-en.html)
 
 ## Namespace Policy
 

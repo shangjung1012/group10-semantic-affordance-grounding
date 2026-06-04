@@ -15,7 +15,7 @@ The submission uses a Python workflow managed by `uv`. RDF parsing and SPARQL qu
 ## Repository Contents
 
 - `ontology/group-ontology.ttl`: Group 10 authored ontology.
-- `ontology/imports/course-affordance.ttl`: Provided course ontology with a minimal Turtle syntax repair for `cap:hasApproxWidth`.
+- `ontology/imports/course-affordance.ttl`: Provided course ontology copied from the homework starter resources.
 - `ontology/imports/course-alignment.ttl`: Provided SKOS alignment resource.
 - `ontology/inferred-results.ttl`: Exported graph after reasoning.
 - `queries/graspable_objects.rq`: Required SPARQL query for inferred graspable objects.
