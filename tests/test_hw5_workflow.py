@@ -104,3 +104,19 @@ def test_reasoning_output_is_stable_across_runs() -> None:
             first_output = current_output
 
     assert current_output == first_output
+
+
+def test_inferred_results_do_not_contain_local_absolute_paths() -> None:
+    subprocess.run(
+        [sys.executable, "src/run_reasoning.py"],
+        cwd=ROOT,
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+
+    output = (ROOT / "ontology/inferred-results.ttl").read_text()
+
+    assert ROOT.as_posix() not in output
+    assert "file://" not in output
+    assert "<imports/course-affordance.ttl>" in output
