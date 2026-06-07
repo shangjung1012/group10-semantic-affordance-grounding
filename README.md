@@ -46,12 +46,15 @@ For Homework 5, this submission also includes the required baseline object vocab
 |   |-- object_affordance_summary_output.txt
 |   |-- graspable_objects_output.txt
 |   |-- task_objects_output.txt
+|   |-- analysis_report.md
 |   `-- shacl_validation_output.txt
 |-- src/
 |   |-- run_reasoning.py
+|   |-- run_analysis.py
 |   `-- run_validation.py
 |-- tests/
 |   |-- test_hw5_workflow.py
+|   |-- test_analysis.py
 |   `-- test_shacl_validation.py
 |-- pyproject.toml
 `-- uv.lock
@@ -74,6 +77,8 @@ For Homework 5, this submission also includes the required baseline object vocab
 - Query outputs: [`results/graspable_objects_output.txt`](results/graspable_objects_output.txt), [`results/task_objects_output.txt`](results/task_objects_output.txt)
 - SHACL validation output: [`results/shacl_validation_output.txt`](results/shacl_validation_output.txt)
 - Report: [`report.md`](report.md)
+- Analysis script: [`src/run_analysis.py`](src/run_analysis.py)
+- Analysis report: [`results/analysis_report.md`](results/analysis_report.md)
 - Widoco documentation: [`docs/widoco/group-ontology/doc/index-en.html`](docs/widoco/group-ontology/doc/index-en.html)
 
 ## Namespace Policy
@@ -132,6 +137,16 @@ uv run python src/run_validation.py
 ```
 
 This writes `results/shacl_validation_output.txt`.
+
+Run the ontology analysis report generator:
+
+```bash
+uv run python src/run_analysis.py
+```
+
+The script writes:
+
+- `results/analysis_report.md` — ontology metrics, affordance coverage matrix, graspability reasoning explanations, and class hierarchy diagram
 
 Run verification tests with:
 
