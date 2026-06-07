@@ -31,16 +31,22 @@ For Homework 5, this submission also includes the required baseline object vocab
 |-- report.md
 |-- ontology/
 |   |-- group-ontology.ttl
+|   |-- shapes.ttl
 |   |-- inferred-results.ttl
 |   `-- imports/
 |       |-- course-affordance.ttl
 |       `-- course-alignment.ttl
 |-- queries/
+|   |-- non_graspable_task_objects.rq
+|   |-- object_affordance_summary.rq
 |   |-- graspable_objects.rq
 |   `-- task_objects.rq
 |-- results/
+|   |-- non_graspable_task_objects_output.txt
+|   |-- object_affordance_summary_output.txt
 |   |-- graspable_objects_output.txt
 |   |-- task_objects_output.txt
+<<<<<<< HEAD
 |   `-- analysis_report.md
 |-- src/
 |   |-- run_reasoning.py
@@ -48,11 +54,20 @@ For Homework 5, this submission also includes the required baseline object vocab
 |-- tests/
 |   |-- test_hw5_workflow.py
 |   `-- test_analysis.py
+=======
+|   `-- shacl_validation_output.txt
+|-- src/
+|   |-- run_reasoning.py
+|   `-- run_validation.py
+|-- tests/
+|   |-- test_hw5_workflow.py
+|   `-- test_shacl_validation.py
+>>>>>>> main
 |-- pyproject.toml
 `-- uv.lock
 ```
 
-`ontology/group-ontology.ttl` is the Group 10 authored ontology. Files under `ontology/imports/` are copied course starter resources and are treated as imported dependencies, not as Group 10 authored ontology files.
+`ontology/group-ontology.ttl` and `ontology/shapes.ttl` are Group 10 authored files. Files under `ontology/imports/` are copied course starter resources and are treated as imported dependencies, not as Group 10 authored ontology files.
 
 ## Key File Links
 
@@ -61,8 +76,13 @@ For Homework 5, this submission also includes the required baseline object vocab
 - Course imports: [`ontology/imports/course-affordance.ttl`](ontology/imports/course-affordance.ttl), [`ontology/imports/course-alignment.ttl`](ontology/imports/course-alignment.ttl)
 - Required query: [`queries/graspable_objects.rq`](queries/graspable_objects.rq)
 - Additional query: [`queries/task_objects.rq`](queries/task_objects.rq)
+- Non-graspable task-object query: [`queries/non_graspable_task_objects.rq`](queries/non_graspable_task_objects.rq)
+- Affordance summary query: [`queries/object_affordance_summary.rq`](queries/object_affordance_summary.rq)
 - Reasoning workflow: [`src/run_reasoning.py`](src/run_reasoning.py)
+- SHACL shapes: [`ontology/shapes.ttl`](ontology/shapes.ttl)
+- SHACL validation workflow: [`src/run_validation.py`](src/run_validation.py)
 - Query outputs: [`results/graspable_objects_output.txt`](results/graspable_objects_output.txt), [`results/task_objects_output.txt`](results/task_objects_output.txt)
+- SHACL validation output: [`results/shacl_validation_output.txt`](results/shacl_validation_output.txt)
 - Report: [`report.md`](report.md)
 - Analysis script: [`src/run_analysis.py`](src/run_analysis.py)
 - Analysis report: [`results/analysis_report.md`](results/analysis_report.md)
@@ -114,6 +134,16 @@ The script writes:
 - `ontology/inferred-results.ttl`
 - `results/graspable_objects_output.txt`
 - `results/task_objects_output.txt`
+- `results/non_graspable_task_objects_output.txt`
+- `results/object_affordance_summary_output.txt`
+
+Run the SHACL structural validation with:
+
+```bash
+uv run python src/run_validation.py
+```
+
+This writes `results/shacl_validation_output.txt`.
 
 Run the ontology analysis report generator:
 
@@ -130,6 +160,19 @@ Run verification tests with:
 ```bash
 uv run pytest
 ```
+
+## SHACL Validation
+
+OWL/RDFS reasoning and SHACL validation play complementary roles in this submission. The reasoning workflow (`src/run_reasoning.py`) *infers* class membership such as `cap:GraspableObject`. SHACL, in contrast, *checks* that the submitted graph satisfies the required structural constraints, as recommended in the homework specification (Section 15).
+
+The Group 10 shapes in [`ontology/shapes.ttl`](ontology/shapes.ttl) enforce:
+
+- every `cap:PhysicalObject` records at least one `cap:hasObjectLabel`;
+- every `cap:PhysicalObject` has at least one `cap:hasTaskRole` whose value is a `cap:TaskRole`;
+- every `cap:PhysicalObject` has at least one `cap:hasAffordance` whose value is a `cap:Affordance`;
+- every object declared `cap:canBeManipulatedBy` an end effector also has at least one `cap:GraspingAffordance`.
+
+Because instances are typed with course subclasses (e.g. `cap:Cup`), validation is run with RDFS inference and the course ontology supplied as the ontology graph, so that `sh:targetClass cap:PhysicalObject` matches every instance. The baseline graph conforms to all four shapes.
 
 ## Widoco Documentation Check
 
@@ -149,6 +192,8 @@ g10:pinkCup01
 ```
 
 The query output is saved in `results/graspable_objects_output.txt`.
+
+Two additional review queries are included. `queries/non_graspable_task_objects.rq` acts as a negative-control query for task-relevant objects that are not inferred as direct grasp targets, and should return `g10:plate01` and `g10:basket01`. `queries/object_affordance_summary.rq` lists each modeled task object with its type, role, affordance class, and inferred graspability status.
 
 ## What Is Inferred
 

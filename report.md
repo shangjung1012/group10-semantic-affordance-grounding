@@ -127,6 +127,7 @@ The tests verify that Turtle files parse, graspable membership is not manually a
 
 Widoco 1.4.25 was also run on `ontology/group-ontology.ttl` as an ontology documentation check. The generated documentation is available under `docs/widoco/group-ontology/doc/index-en.html` and lists the ontology metadata, imported course ontology, `cap:GraspableObject` equivalent-class axiom, and modeled task-object individuals.
 
+<<<<<<< HEAD
 ## Ontology Analysis
 
 In addition to inference and query output, the submission includes a standalone analysis module (`src/run_analysis.py`) that examines the ontology and inferred graph programmatically using RDFLib graph traversal.
@@ -147,6 +148,22 @@ uv run python src/run_analysis.py
 ```
 
 The corresponding test suite (`tests/test_analysis.py`) verifies that metrics values are reasonable, all eight Group 10 objects appear in the affordance matrix, the graspability classification is correct (six graspable, two not), and the report file is generated successfully.
+=======
+## SHACL Validation
+
+In addition to OWL/RDFS reasoning, the submission includes an optional SHACL validation layer (Homework 5, Section 15) to separate *reasoning* from *validation*. OWL infers class membership such as `cap:GraspableObject`; SHACL checks that the submitted graph satisfies the required structural constraints.
+
+The Group 10 shapes are authored in `ontology/shapes.ttl` and are executed by `src/run_validation.py` using `pyshacl`. Each shape carries an `rdfs:label`, an `sh:description`, and an `sh:message` for readable violation reporting. The four constraints are:
+
+| Shape | Constraint |
+| --- | --- |
+| `g10:PhysicalObjectLabelShape` | every `cap:PhysicalObject` has at least one `cap:hasObjectLabel` (string) |
+| `g10:TaskRoleShape` | every `cap:PhysicalObject` has at least one `cap:hasTaskRole` of type `cap:TaskRole` |
+| `g10:AffordanceShape` | every `cap:PhysicalObject` has at least one `cap:hasAffordance` of type `cap:Affordance` |
+| `g10:ManipulationTargetShape` | every object with `cap:canBeManipulatedBy` also has at least one `cap:GraspingAffordance` |
+
+Because instances are typed with course subclasses (e.g. `cap:Cup`), validation runs with `inference="rdfs"` and supplies the course ontology as the ontology graph, so `sh:targetClass cap:PhysicalObject` matches all instances. The baseline graph conforms to all four shapes, and the result is saved to `results/shacl_validation_output.txt`. The regression test `tests/test_shacl_validation.py` additionally confirms that removing a required `cap:hasObjectLabel` makes the graph non-conformant, demonstrating that the constraints are actively enforced rather than vacuous.
+>>>>>>> main
 
 ## Limitations
 

@@ -1,5 +1,5 @@
 <https://hcis.io/ontology/aicapstone/2026/group10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
-<https://hcis.io/ontology/aicapstone/2026/group10> <http://www.w3.org/2002/07/owl#imports> <file:/home/shangjung/Documents/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> .
+<https://hcis.io/ontology/aicapstone/2026/group10> <http://www.w3.org/2002/07/owl#imports> <file:/C:/Users/ASUS/Desktop/114-2/AIC/hw5/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> .
 <https://hcis.io/ontology/aicapstone/2026/group10> <http://purl.org/dc/terms/created> "2026-05-26"^^<http://www.w3.org/2001/XMLSchema#date> .
 <https://hcis.io/ontology/aicapstone/2026/group10> <http://purl.org/dc/terms/creator> <https://hcis.io/ontology/aicapstone/2026/group10/group10> .
 <https://hcis.io/ontology/aicapstone/2026/group10> <http://purl.org/dc/terms/description> "This ontology defines Group 10 object instances, task roles, affordance individuals, and the graspable-object reasoning axiom used for Homework 5."@en .

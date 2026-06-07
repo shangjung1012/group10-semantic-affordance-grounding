@@ -1,0 +1,27 @@
+PREFIX cap: <https://hcis.io/ontology/aicapstone/2026/>
+
+SELECT DISTINCT ?obj ?type ?label ?role ?affordance ?graspable
+WHERE {
+  VALUES ?type { cap:Cup cap:Knife cap:Fork cap:Plate cap:ToyBlock cap:Basket }
+  VALUES ?role {
+    cap:TargetObject
+    cap:ReferenceObject
+    cap:ContainerTarget
+    cap:CollectableObject
+  }
+  VALUES ?affordance {
+    cap:GraspingAffordance
+    cap:StackabilityAffordance
+    cap:SupportAffordance
+    cap:ContainmentAffordance
+  }
+  ?obj a ?type .
+  FILTER(STRSTARTS(STR(?obj), "https://hcis.io/ontology/aicapstone/2026/group10/"))
+  OPTIONAL { ?obj cap:hasObjectLabel ?label . }
+  ?obj cap:hasTaskRole ?roleIndividual .
+  ?roleIndividual a ?role .
+  ?obj cap:hasAffordance ?affordanceIndividual .
+  ?affordanceIndividual a ?affordance .
+  BIND(EXISTS { ?obj a cap:GraspableObject } AS ?graspable)
+}
+ORDER BY ?obj ?affordance
