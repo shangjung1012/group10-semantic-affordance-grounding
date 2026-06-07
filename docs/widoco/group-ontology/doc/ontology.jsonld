@@ -73,7 +73,7 @@
     "@value" : "Group 10 Semantic Affordance Grounding Ontology"
   } ],
   "http://www.w3.org/2002/07/owl#imports" : [ {
-    "@id" : "file:/home/shangjung/Documents/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl"
+    "@id" : "file:/C:/Users/ASUS/Desktop/114-2/AIC/hw5/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl"
   } ]
 }, {
   "@id" : "https://hcis.io/ontology/aicapstone/2026/group10/basket01",
