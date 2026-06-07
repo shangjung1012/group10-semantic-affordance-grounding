@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Iterable
 
 from owlrl import DeductiveClosure, OWLRL_Semantics
-from rdflib import Graph, Namespace, RDF, RDFS, URIRef
+from rdflib import Graph, Namespace, OWL, RDF, RDFS, URIRef
 from rdflib.compare import to_canonical_graph
 from rdflib.query import ResultRow
 
@@ -15,9 +15,11 @@ COURSE_ONTOLOGY = ROOT / "ontology/imports/course-affordance.ttl"
 COURSE_ALIGNMENT = ROOT / "ontology/imports/course-alignment.ttl"
 GROUP_ONTOLOGY = ROOT / "ontology/group-ontology.ttl"
 INFERRED_RESULTS = ROOT / "ontology/inferred-results.ttl"
+COURSE_IMPORT_IRI = URIRef("imports/course-affordance.ttl")
 QUERIES = {
     ROOT / "queries/graspable_objects.rq": ROOT / "results/graspable_objects_output.txt",
     ROOT / "queries/task_objects.rq": ROOT / "results/task_objects_output.txt",
+    ROOT / "queries/simulation_grounding.rq": ROOT / "results/simulation_grounding_output.txt",
 }
 
 CAP = Namespace("https://hcis.io/ontology/aicapstone/2026/")
@@ -107,7 +109,29 @@ def write_query_outputs(graph: Graph) -> None:
         output_path.write_text(format_rows(graph, result, variables))
 
 
+def replace_course_import_with_relative_iri(graph: Graph) -> None:
+    absolute_import_iri = URIRef(COURSE_ONTOLOGY.resolve().as_uri())
+    replacements = []
+    for subject, predicate, object_ in graph:
+        if absolute_import_iri in {subject, object_}:
+            replacements.append((subject, predicate, object_))
+
+    for subject, predicate, object_ in replacements:
+        graph.remove((subject, predicate, object_))
+        graph.add(
+            (
+                COURSE_IMPORT_IRI if subject == absolute_import_iri else subject,
+                predicate,
+                COURSE_IMPORT_IRI if object_ == absolute_import_iri else object_,
+            )
+        )
+
+    for ontology in graph.subjects(OWL.imports, COURSE_IMPORT_IRI):
+        graph.remove((ontology, OWL.imports, absolute_import_iri))
+
+
 def serialize_inferred_graph(graph: Graph) -> None:
+    replace_course_import_with_relative_iri(graph)
     canonical_graph = Graph()
     for prefix, namespace in graph.namespaces():
         canonical_graph.bind(prefix, namespace)

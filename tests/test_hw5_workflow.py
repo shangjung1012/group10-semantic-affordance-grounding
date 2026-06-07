@@ -87,6 +87,42 @@ def test_saved_graspable_output_matches_expected_objects() -> None:
     assert "basket01" not in output
 
 
+def test_saved_simulation_grounding_output_matches_expected_labels_and_frames() -> None:
+    subprocess.run(
+        [sys.executable, "src/run_reasoning.py"],
+        cwd=ROOT,
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+
+    output = (ROOT / "results/simulation_grounding_output.txt").read_text()
+
+    for label in [
+        "blue_cup",
+        "pink_cup",
+        "knife",
+        "fork",
+        "plate",
+        "toy_block_red",
+        "toy_block_yellow",
+        "basket",
+    ]:
+        assert label in output
+
+    for pose_frame in [
+        "world/object_blue_cup",
+        "world/object_pink_cup",
+        "world/object_knife",
+        "world/object_fork",
+        "world/object_plate",
+        "world/object_block_01",
+        "world/object_block_02",
+        "world/object_basket",
+    ]:
+        assert pose_frame in output
+
+
 def test_reasoning_output_is_stable_across_runs() -> None:
     first_output = None
 
@@ -104,3 +140,19 @@ def test_reasoning_output_is_stable_across_runs() -> None:
             first_output = current_output
 
     assert current_output == first_output
+
+
+def test_inferred_results_do_not_contain_local_absolute_paths() -> None:
+    subprocess.run(
+        [sys.executable, "src/run_reasoning.py"],
+        cwd=ROOT,
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+
+    output = (ROOT / "ontology/inferred-results.ttl").read_text()
+
+    assert ROOT.as_posix() not in output
+    assert "file://" not in output
+    assert "<imports/course-affordance.ttl>" in output
