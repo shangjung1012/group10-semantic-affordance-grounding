@@ -1,0 +1,4 @@
+obj          | label  | role               
+-------------+--------+--------------------
+g10:basket01 | basket | cap:ContainerTarget
+g10:plate01  | plate  | cap:ReferenceObject
