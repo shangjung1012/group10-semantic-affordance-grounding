@@ -22,6 +22,7 @@ QUERIES = {
 
 CAP = Namespace("https://hcis.io/ontology/aicapstone/2026/")
 G10 = Namespace("https://hcis.io/ontology/aicapstone/2026/group10/")
+LOCAL_COURSE_IMPORT = URIRef("imports/course-affordance.ttl")
 
 
 def load_graph() -> Graph:
@@ -111,7 +112,14 @@ def serialize_inferred_graph(graph: Graph) -> None:
     canonical_graph = Graph()
     for prefix, namespace in graph.namespaces():
         canonical_graph.bind(prefix, namespace)
-    canonical_graph += to_canonical_graph(graph)
+    for subject, predicate, object_ in to_canonical_graph(graph):
+        normalized_subject = (
+            LOCAL_COURSE_IMPORT if subject == URIRef(COURSE_ONTOLOGY.as_uri()) else subject
+        )
+        normalized_object = (
+            LOCAL_COURSE_IMPORT if object_ == URIRef(COURSE_ONTOLOGY.as_uri()) else object_
+        )
+        canonical_graph.add((normalized_subject, predicate, normalized_object))
     canonical_graph.serialize(destination=INFERRED_RESULTS, format="turtle")
 
 
