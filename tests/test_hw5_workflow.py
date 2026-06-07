@@ -39,6 +39,31 @@ def test_task_role_values_are_group_role_individuals() -> None:
     assert all(str(role).startswith(str(G10)) for role in role_values)
 
 
+def test_baseline_task_objects_have_complete_metadata() -> None:
+    graph = parse_turtle(ROOT / "ontology/group-ontology.ttl")
+    task_objects = {
+        G10.blueCup01,
+        G10.pinkCup01,
+        G10.knife01,
+        G10.fork01,
+        G10.plate01,
+        G10.block01,
+        G10.block02,
+        G10.basket01,
+    }
+    required_properties = {
+        CAP.hasObjectLabel,
+        CAP.hasColor,
+        CAP.hasPoseFrame,
+        CAP.hasTaskRole,
+        CAP.hasAffordance,
+    }
+
+    for obj in task_objects:
+        for predicate in required_properties:
+            assert (obj, predicate, None) in graph
+
+
 def test_reasoning_script_generates_expected_graspable_objects() -> None:
     subprocess.run(
         [sys.executable, "src/run_reasoning.py"],
@@ -85,6 +110,44 @@ def test_saved_graspable_output_matches_expected_objects() -> None:
 
     assert "plate01" not in output
     assert "basket01" not in output
+
+
+def test_saved_non_graspable_output_matches_expected_objects() -> None:
+    subprocess.run(
+        [sys.executable, "src/run_reasoning.py"],
+        cwd=ROOT,
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+
+    output = (ROOT / "results/non_graspable_task_objects_output.txt").read_text()
+
+    assert "plate01" in output
+    assert "basket01" in output
+    for name in ["blueCup01", "pinkCup01", "knife01", "fork01", "block01", "block02"]:
+        assert name not in output
+
+
+def test_affordance_summary_output_shows_graspable_and_non_graspable_rows() -> None:
+    subprocess.run(
+        [sys.executable, "src/run_reasoning.py"],
+        cwd=ROOT,
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+
+    output = (ROOT / "results/object_affordance_summary_output.txt").read_text()
+
+    assert "blueCup01" in output
+    assert "cap:GraspingAffordance" in output
+    assert "true" in output
+    assert "plate01" in output
+    assert "cap:SupportAffordance" in output
+    assert "basket01" in output
+    assert "cap:ContainmentAffordance" in output
+    assert "false" in output
 
 
 def test_reasoning_output_is_stable_across_runs() -> None:
