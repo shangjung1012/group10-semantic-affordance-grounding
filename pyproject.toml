@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "owlrl>=7.1.4",
+    "pyshacl>=0.26",
     "rdflib>=7.1.4",
 ]
 

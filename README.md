@@ -31,6 +31,7 @@ For Homework 5, this submission also includes the required baseline object vocab
 |-- report.md
 |-- ontology/
 |   |-- group-ontology.ttl
+|   |-- shapes.ttl
 |   |-- inferred-results.ttl
 |   `-- imports/
 |       |-- course-affordance.ttl
@@ -40,16 +41,19 @@ For Homework 5, this submission also includes the required baseline object vocab
 |   `-- task_objects.rq
 |-- results/
 |   |-- graspable_objects_output.txt
-|   `-- task_objects_output.txt
+|   |-- task_objects_output.txt
+|   `-- shacl_validation_output.txt
 |-- src/
-|   `-- run_reasoning.py
+|   |-- run_reasoning.py
+|   `-- run_validation.py
 |-- tests/
-|   `-- test_hw5_workflow.py
+|   |-- test_hw5_workflow.py
+|   `-- test_shacl_validation.py
 |-- pyproject.toml
 `-- uv.lock
 ```
 
-`ontology/group-ontology.ttl` is the Group 10 authored ontology. Files under `ontology/imports/` are copied course starter resources and are treated as imported dependencies, not as Group 10 authored ontology files.
+`ontology/group-ontology.ttl` and `ontology/shapes.ttl` are Group 10 authored files. Files under `ontology/imports/` are copied course starter resources and are treated as imported dependencies, not as Group 10 authored ontology files.
 
 ## Key File Links
 
@@ -59,7 +63,10 @@ For Homework 5, this submission also includes the required baseline object vocab
 - Required query: [`queries/graspable_objects.rq`](queries/graspable_objects.rq)
 - Additional query: [`queries/task_objects.rq`](queries/task_objects.rq)
 - Reasoning workflow: [`src/run_reasoning.py`](src/run_reasoning.py)
+- SHACL shapes: [`ontology/shapes.ttl`](ontology/shapes.ttl)
+- SHACL validation workflow: [`src/run_validation.py`](src/run_validation.py)
 - Query outputs: [`results/graspable_objects_output.txt`](results/graspable_objects_output.txt), [`results/task_objects_output.txt`](results/task_objects_output.txt)
+- SHACL validation output: [`results/shacl_validation_output.txt`](results/shacl_validation_output.txt)
 - Report: [`report.md`](report.md)
 - Widoco documentation: [`docs/widoco/group-ontology/doc/index-en.html`](docs/widoco/group-ontology/doc/index-en.html)
 
@@ -110,11 +117,32 @@ The script writes:
 - `results/graspable_objects_output.txt`
 - `results/task_objects_output.txt`
 
+Run the SHACL structural validation with:
+
+```bash
+uv run python src/run_validation.py
+```
+
+This writes `results/shacl_validation_output.txt`.
+
 Run verification tests with:
 
 ```bash
 uv run pytest
 ```
+
+## SHACL Validation
+
+OWL/RDFS reasoning and SHACL validation play complementary roles in this submission. The reasoning workflow (`src/run_reasoning.py`) *infers* class membership such as `cap:GraspableObject`. SHACL, in contrast, *checks* that the submitted graph satisfies the required structural constraints, as recommended in the homework specification (Section 15).
+
+The Group 10 shapes in [`ontology/shapes.ttl`](ontology/shapes.ttl) enforce:
+
+- every `cap:PhysicalObject` records at least one `cap:hasObjectLabel`;
+- every `cap:PhysicalObject` has at least one `cap:hasTaskRole` whose value is a `cap:TaskRole`;
+- every `cap:PhysicalObject` has at least one `cap:hasAffordance` whose value is a `cap:Affordance`;
+- every object declared `cap:canBeManipulatedBy` an end effector also has at least one `cap:GraspingAffordance`.
+
+Because instances are typed with course subclasses (e.g. `cap:Cup`), validation is run with RDFS inference and the course ontology supplied as the ontology graph, so that `sh:targetClass cap:PhysicalObject` matches every instance. The baseline graph conforms to all four shapes.
 
 ## Widoco Documentation Check
 
