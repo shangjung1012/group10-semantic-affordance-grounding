@@ -1,0 +1,89 @@
+@prefix cap:  <https://hcis.io/ontology/aicapstone/2026/> .
+@prefix g10:  <https://hcis.io/ontology/aicapstone/2026/group10/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+#################################################################
+# Group 10 SHACL Shapes
+#
+# These shapes are authored by Group 10 (file: ontology/shapes.ttl).
+# They implement the optional SHACL validation profile described in
+# Homework 5, Section 15. OWL/RDFS reasoning (see src/run_reasoning.py)
+# infers class membership such as cap:GraspableObject; SHACL, in
+# contrast, checks that the submitted graph satisfies the required
+# structural constraints. The two mechanisms are complementary.
+#
+# Note: instances are typed with course subclasses such as cap:Cup,
+# so validation must be run with RDFS inference and the course
+# ontology supplied as an ontology graph. See src/run_validation.py.
+#################################################################
+
+<https://hcis.io/ontology/aicapstone/2026/group10/shapes>
+    a owl:Ontology ;
+    rdfs:label "Group 10 SHACL Shapes"@en ;
+    rdfs:comment
+        "SHACL structural constraints for the Group 10 Homework 5 ontology, implementing the optional validation profile in Section 15."@en ;
+    dcterms:title "Group 10 SHACL Shapes"@en ;
+    dcterms:creator g10:group10 ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> .
+
+# 1. Every physical object must carry a perception/simulation label.
+g10:PhysicalObjectLabelShape
+    a sh:NodeShape ;
+    rdfs:label "physical object label shape"@en ;
+    sh:description
+        "Requires every physical object to record at least one cap:hasObjectLabel so it can be grounded against perception or simulation."@en ;
+    sh:targetClass cap:PhysicalObject ;
+    sh:property [
+        sh:path cap:hasObjectLabel ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Every cap:PhysicalObject must have at least one string cap:hasObjectLabel."@en ;
+    ] .
+
+# 2. Every physical object must be assigned a task role of the correct type.
+g10:TaskRoleShape
+    a sh:NodeShape ;
+    rdfs:label "task role shape"@en ;
+    sh:description
+        "Requires every physical object to declare at least one cap:hasTaskRole, and that the value is a cap:TaskRole."@en ;
+    sh:targetClass cap:PhysicalObject ;
+    sh:property [
+        sh:path cap:hasTaskRole ;
+        sh:minCount 1 ;
+        sh:class cap:TaskRole ;
+        sh:message "Every cap:PhysicalObject must have at least one cap:hasTaskRole whose value is a cap:TaskRole."@en ;
+    ] .
+
+# 3. Every physical object must declare at least one affordance of the correct type.
+g10:AffordanceShape
+    a sh:NodeShape ;
+    rdfs:label "affordance shape"@en ;
+    sh:description
+        "Requires every physical object to declare at least one cap:hasAffordance, and that the value is a cap:Affordance."@en ;
+    sh:targetClass cap:PhysicalObject ;
+    sh:property [
+        sh:path cap:hasAffordance ;
+        sh:minCount 1 ;
+        sh:class cap:Affordance ;
+        sh:message "Every cap:PhysicalObject must have at least one cap:hasAffordance whose value is a cap:Affordance."@en ;
+    ] .
+
+# 4. Any object declared manipulable by an end effector must actually
+#    afford grasping. This encodes the modeling commitment that a
+#    manipulation target is not merely task-relevant but graspable.
+g10:ManipulationTargetShape
+    a sh:NodeShape ;
+    rdfs:label "manipulation target shape"@en ;
+    sh:description
+        "Requires every object that declares cap:canBeManipulatedBy to also have at least one grasping affordance, so manipulation targets are consistent with graspability."@en ;
+    sh:targetSubjectsOf cap:canBeManipulatedBy ;
+    sh:property [
+        sh:path cap:hasAffordance ;
+        sh:qualifiedValueShape [ sh:class cap:GraspingAffordance ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:message "An object that cap:canBeManipulatedBy an end effector must have at least one cap:GraspingAffordance."@en ;
+    ] .
