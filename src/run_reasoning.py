@@ -18,6 +18,12 @@ INFERRED_RESULTS = ROOT / "ontology/inferred-results.ttl"
 QUERIES = {
     ROOT / "queries/graspable_objects.rq": ROOT / "results/graspable_objects_output.txt",
     ROOT / "queries/task_objects.rq": ROOT / "results/task_objects_output.txt",
+    ROOT / "queries/non_graspable_task_objects.rq": (
+        ROOT / "results/non_graspable_task_objects_output.txt"
+    ),
+    ROOT / "queries/object_affordance_summary.rq": (
+        ROOT / "results/object_affordance_summary_output.txt"
+    ),
 }
 
 CAP = Namespace("https://hcis.io/ontology/aicapstone/2026/")

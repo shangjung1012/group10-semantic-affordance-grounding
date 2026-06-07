@@ -20,9 +20,14 @@ REQUIRED_FILES = [
     ROOT / "ontology/inferred-results.ttl",
     ROOT / "queries/graspable_objects.rq",
     ROOT / "queries/task_objects.rq",
+    ROOT / "queries/non_graspable_task_objects.rq",
+    ROOT / "queries/object_affordance_summary.rq",
     ROOT / "results/graspable_objects_output.txt",
     ROOT / "results/task_objects_output.txt",
+    ROOT / "results/non_graspable_task_objects_output.txt",
+    ROOT / "results/object_affordance_summary_output.txt",
     ROOT / "src/run_reasoning.py",
+    ROOT / "src/validate_submission.py",
     ROOT / "tests/test_hw5_workflow.py",
 ]
 
@@ -129,6 +134,14 @@ def check_group_ontology_modeling(graph: Graph) -> None:
             expected["color"] in {str(color) for color in graph.objects(obj, CAP.hasColor)},
             f"{compact(obj)} has wrong color",
         )
+        require(
+            (obj, CAP.hasPoseFrame, None) in graph,
+            f"{compact(obj)} is missing cap:hasPoseFrame",
+        )
+        require(
+            (obj, CAP.hasAffordance, None) in graph,
+            f"{compact(obj)} is missing cap:hasAffordance",
+        )
 
         role_values = set(graph.objects(obj, CAP.hasTaskRole))
         require(role_values, f"{compact(obj)} is missing cap:hasTaskRole")
@@ -180,6 +193,12 @@ def check_saved_query_outputs_match_reasoning(graph: Graph) -> None:
     for query_path, output_path in {
         ROOT / "queries/graspable_objects.rq": ROOT / "results/graspable_objects_output.txt",
         ROOT / "queries/task_objects.rq": ROOT / "results/task_objects_output.txt",
+        ROOT / "queries/non_graspable_task_objects.rq": (
+            ROOT / "results/non_graspable_task_objects_output.txt"
+        ),
+        ROOT / "queries/object_affordance_summary.rq": (
+            ROOT / "results/object_affordance_summary_output.txt"
+        ),
     }.items():
         query_result = inferred.query(query_path.read_text())
         expected_output = format_rows(inferred, query_result, [str(var) for var in query_result.vars])
