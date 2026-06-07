@@ -116,6 +116,12 @@ Run verification tests with:
 uv run pytest
 ```
 
+Run the submission validation checklist with:
+
+```bash
+uv run python src/validate_submission.py
+```
+
 ## Widoco Documentation Check
 
 Widoco 1.4.25 was run on `ontology/group-ontology.ttl` as an ontology documentation check. The documentation was generated successfully under `docs/widoco/group-ontology/doc/index-en.html`, and it lists the ontology metadata, imported course ontology, `cap:GraspableObject` equivalent-class axiom, and modeled task-object individuals.
