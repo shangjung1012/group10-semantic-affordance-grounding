@@ -120,3 +120,13 @@ def test_inferred_results_do_not_contain_local_absolute_paths() -> None:
     assert ROOT.as_posix() not in output
     assert "file://" not in output
     assert "<imports/course-affordance.ttl>" in output
+
+
+def test_submission_validation_script_passes() -> None:
+    subprocess.run(
+        [sys.executable, "src/validate_submission.py"],
+        cwd=ROOT,
+        check=True,
+        text=True,
+        capture_output=True,
+    )
