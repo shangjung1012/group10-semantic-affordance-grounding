@@ -46,23 +46,16 @@ For Homework 5, this submission also includes the required baseline object vocab
 |   |-- object_affordance_summary_output.txt
 |   |-- graspable_objects_output.txt
 |   |-- task_objects_output.txt
-<<<<<<< HEAD
-|   `-- analysis_report.md
-|-- src/
-|   |-- run_reasoning.py
-|   `-- run_analysis.py
-|-- tests/
-|   |-- test_hw5_workflow.py
-|   `-- test_analysis.py
-=======
+|   |-- analysis_report.md
 |   `-- shacl_validation_output.txt
 |-- src/
 |   |-- run_reasoning.py
+|   |-- run_analysis.py
 |   `-- run_validation.py
 |-- tests/
 |   |-- test_hw5_workflow.py
+|   |-- test_analysis.py
 |   `-- test_shacl_validation.py
->>>>>>> main
 |-- pyproject.toml
 `-- uv.lock
 ```
