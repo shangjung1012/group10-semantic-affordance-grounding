@@ -127,6 +127,27 @@ The tests verify that Turtle files parse, graspable membership is not manually a
 
 Widoco 1.4.25 was also run on `ontology/group-ontology.ttl` as an ontology documentation check. The generated documentation is available under `docs/widoco/group-ontology/doc/index-en.html` and lists the ontology metadata, imported course ontology, `cap:GraspableObject` equivalent-class axiom, and modeled task-object individuals.
 
+## Ontology Analysis
+
+In addition to inference and query output, the submission includes a standalone analysis module (`src/run_analysis.py`) that examines the ontology and inferred graph programmatically using RDFLib graph traversal.
+
+The analysis produces four sections:
+
+| Section | Description |
+| --- | --- |
+| Ontology Metrics | Triple counts (source vs. inferred), class/property/individual counts, namespace breakdown |
+| Affordance Coverage Matrix | Object × affordance table showing which objects have which affordance types |
+| Graspability Reasoning Explanation | Per-object inference chain showing type, asserted affordances, and inferred graspability status |
+| Class Hierarchy Diagram | Mermaid-format diagram of `rdfs:subClassOf` relationships among course and group classes |
+
+The analysis report is written to `results/analysis_report.md` and can be regenerated with:
+
+```bash
+uv run python src/run_analysis.py
+```
+
+The corresponding test suite (`tests/test_analysis.py`) verifies that metrics values are reasonable, all eight Group 10 objects appear in the affordance matrix, the graspability classification is correct (six graspable, two not), and the report file is generated successfully.
+
 ## Limitations
 
 This submission intentionally stays within the baseline task scope. It does not model advanced gripper constraints, mass, deformability, task success criteria, or policy success/failure comparisons. The reasoning workflow is a compact educational implementation rather than a full OWL DL reasoner.

@@ -40,11 +40,14 @@ For Homework 5, this submission also includes the required baseline object vocab
 |   `-- task_objects.rq
 |-- results/
 |   |-- graspable_objects_output.txt
-|   `-- task_objects_output.txt
+|   |-- task_objects_output.txt
+|   `-- analysis_report.md
 |-- src/
-|   `-- run_reasoning.py
+|   |-- run_reasoning.py
+|   `-- run_analysis.py
 |-- tests/
-|   `-- test_hw5_workflow.py
+|   |-- test_hw5_workflow.py
+|   `-- test_analysis.py
 |-- pyproject.toml
 `-- uv.lock
 ```
@@ -61,6 +64,8 @@ For Homework 5, this submission also includes the required baseline object vocab
 - Reasoning workflow: [`src/run_reasoning.py`](src/run_reasoning.py)
 - Query outputs: [`results/graspable_objects_output.txt`](results/graspable_objects_output.txt), [`results/task_objects_output.txt`](results/task_objects_output.txt)
 - Report: [`report.md`](report.md)
+- Analysis script: [`src/run_analysis.py`](src/run_analysis.py)
+- Analysis report: [`results/analysis_report.md`](results/analysis_report.md)
 - Widoco documentation: [`docs/widoco/group-ontology/doc/index-en.html`](docs/widoco/group-ontology/doc/index-en.html)
 
 ## Namespace Policy
@@ -109,6 +114,16 @@ The script writes:
 - `ontology/inferred-results.ttl`
 - `results/graspable_objects_output.txt`
 - `results/task_objects_output.txt`
+
+Run the ontology analysis report generator:
+
+```bash
+uv run python src/run_analysis.py
+```
+
+The script writes:
+
+- `results/analysis_report.md` — ontology metrics, affordance coverage matrix, graspability reasoning explanations, and class hierarchy diagram
 
 Run verification tests with:
 
