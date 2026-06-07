@@ -1,0 +1,10 @@
+obj           | label            | poseFrame             | role                 
+--------------+------------------+-----------------------+----------------------
+g10:basket01  | basket           | world/object_basket   | cap:ContainerTarget  
+g10:block01   | toy_block_red    | world/object_block_01 | cap:CollectableObject
+g10:block02   | toy_block_yellow | world/object_block_02 | cap:CollectableObject
+g10:blueCup01 | blue_cup         | world/object_blue_cup | cap:TargetObject     
+g10:fork01    | fork             | world/object_fork     | cap:TargetObject     
+g10:knife01   | knife            | world/object_knife    | cap:TargetObject     
+g10:pinkCup01 | pink_cup         | world/object_pink_cup | cap:TargetObject     
+g10:plate01   | plate            | world/object_plate    | cap:ReferenceObject  

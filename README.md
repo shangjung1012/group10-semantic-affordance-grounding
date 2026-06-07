@@ -40,12 +40,14 @@ For Homework 5, this submission also includes the required baseline object vocab
 |   |-- non_graspable_task_objects.rq
 |   |-- object_affordance_summary.rq
 |   |-- graspable_objects.rq
-|   `-- task_objects.rq
+|   |-- task_objects.rq
+|   `-- simulation_grounding.rq
 |-- results/
 |   |-- non_graspable_task_objects_output.txt
 |   |-- object_affordance_summary_output.txt
 |   |-- graspable_objects_output.txt
 |   |-- task_objects_output.txt
+|   |-- simulation_grounding_output.txt
 |   |-- analysis_report.md
 |   `-- shacl_validation_output.txt
 |-- src/
@@ -71,10 +73,12 @@ For Homework 5, this submission also includes the required baseline object vocab
 - Additional query: [`queries/task_objects.rq`](queries/task_objects.rq)
 - Non-graspable task-object query: [`queries/non_graspable_task_objects.rq`](queries/non_graspable_task_objects.rq)
 - Affordance summary query: [`queries/object_affordance_summary.rq`](queries/object_affordance_summary.rq)
+- Simulation grounding query: [`queries/simulation_grounding.rq`](queries/simulation_grounding.rq)
 - Reasoning workflow: [`src/run_reasoning.py`](src/run_reasoning.py)
 - SHACL shapes: [`ontology/shapes.ttl`](ontology/shapes.ttl)
 - SHACL validation workflow: [`src/run_validation.py`](src/run_validation.py)
 - Query outputs: [`results/graspable_objects_output.txt`](results/graspable_objects_output.txt), [`results/task_objects_output.txt`](results/task_objects_output.txt)
+- Simulation grounding output: [`results/simulation_grounding_output.txt`](results/simulation_grounding_output.txt)
 - SHACL validation output: [`results/shacl_validation_output.txt`](results/shacl_validation_output.txt)
 - Report: [`report.md`](report.md)
 - Analysis script: [`src/run_analysis.py`](src/run_analysis.py)
@@ -129,6 +133,7 @@ The script writes:
 - `results/task_objects_output.txt`
 - `results/non_graspable_task_objects_output.txt`
 - `results/object_affordance_summary_output.txt`
+- `results/simulation_grounding_output.txt`
 
 Run the SHACL structural validation with:
 
@@ -186,7 +191,7 @@ g10:pinkCup01
 
 The query output is saved in `results/graspable_objects_output.txt`.
 
-Two additional review queries are included. `queries/non_graspable_task_objects.rq` acts as a negative-control query for task-relevant objects that are not inferred as direct grasp targets, and should return `g10:plate01` and `g10:basket01`. `queries/object_affordance_summary.rq` lists each modeled task object with its type, role, affordance class, and inferred graspability status.
+Three additional review queries are included. `queries/non_graspable_task_objects.rq` acts as a negative-control query for task-relevant objects that are not inferred as direct grasp targets, and should return `g10:plate01` and `g10:basket01`. `queries/object_affordance_summary.rq` lists each modeled task object with its type, role, affordance class, and inferred graspability status. `queries/simulation_grounding.rq` is an extension that connects each ontology individual to its perception label and pose-frame identifier.
 
 ## What Is Inferred
 

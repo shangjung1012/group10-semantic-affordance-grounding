@@ -20,7 +20,9 @@ The submission uses a Python workflow managed by `uv`. RDF parsing and SPARQL qu
 - `ontology/inferred-results.ttl`: Exported graph after reasoning.
 - `queries/graspable_objects.rq`: Required SPARQL query for inferred graspable objects.
 - `queries/task_objects.rq`: Additional query listing modeled task objects.
+- `queries/simulation_grounding.rq`: Optional Section 19 extension query linking ontology objects to perception labels and pose-frame identifiers.
 - `results/graspable_objects_output.txt`: Saved output of the required query.
+- `results/simulation_grounding_output.txt`: Saved output of the simulation grounding query.
 - `src/run_reasoning.py`: Reproducible local reasoning and query workflow.
 - `tests/test_hw5_workflow.py`: Regression tests for parsing, inference, and output generation.
 
@@ -112,6 +114,9 @@ g10:pinkCup01
 ```
 
 `g10:plate01` and `g10:basket01` are excluded because they do not have the asserted grasping affordance in this model.
+
+## Optional Simulation Grounding Extension
+The repository includes `queries/simulation_grounding.rq`. This query connects each Group 10 ontology individual to the object label and pose-frame identifier used by the perception or simulation pipeline. The output in `results/simulation_grounding_output.txt` makes the grounding link explicit, for example mapping `g10:blueCup01` to `blue_cup` and `world/object_blue_cup`.
 
 ## Reproducibility
 
