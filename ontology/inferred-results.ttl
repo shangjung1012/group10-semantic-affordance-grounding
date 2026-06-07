@@ -1390,4 +1390,3 @@ _:cb169e48f3b7887efad2d0f256c61d5047287d8d73f40a3375c3490407a5a8e961f7 a owl:Res
     owl:onProperty cap:hasAffordance ;
     owl:sameAs _:cb169e48f3b7887efad2d0f256c61d5047287d8d73f40a3375c3490407a5a8e961f7 ;
     owl:someValuesFrom cap:GraspingAffordance .
-
