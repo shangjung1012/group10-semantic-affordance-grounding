@@ -219,7 +219,7 @@ cap:group10 a owl:Ontology ;
     vann:preferredNamespacePrefix "g10" ;
     vann:preferredNamespaceUri "https://hcis.io/ontology/aicapstone/2026/group10/" ;
     rdfs:comment "Group 10 ontology for grounding baseline AI Capstone task objects and inferring graspable objects from grasping affordances."@en ;
-    owl:imports <file:///home/shangjung/Documents/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> ;
+    owl:imports <file:///C:/Users/ASUS/Desktop/114-2/AIC/hw5/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> ;
     owl:sameAs cap:group10 .
 
 g10:cupStackingTask a owl:Thing,
@@ -251,7 +251,7 @@ g10:toyBlockCollectionTask a owl:Thing,
     cap:hasTargetObject g10:block01,
         g10:block02 .
 
-<file:///home/shangjung/Documents/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> owl:sameAs <file:///home/shangjung/Documents/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> .
+<file:///C:/Users/ASUS/Desktop/114-2/AIC/hw5/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> owl:sameAs <file:///C:/Users/ASUS/Desktop/114-2/AIC/hw5/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> .
 
 cora:Robot owl:sameAs cora:Robot .
 
