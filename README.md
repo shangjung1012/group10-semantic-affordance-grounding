@@ -37,9 +37,13 @@ For Homework 5, this submission also includes the required baseline object vocab
 |       |-- course-affordance.ttl
 |       `-- course-alignment.ttl
 |-- queries/
+|   |-- non_graspable_task_objects.rq
+|   |-- object_affordance_summary.rq
 |   |-- graspable_objects.rq
 |   `-- task_objects.rq
 |-- results/
+|   |-- non_graspable_task_objects_output.txt
+|   |-- object_affordance_summary_output.txt
 |   |-- graspable_objects_output.txt
 |   |-- task_objects_output.txt
 |   `-- shacl_validation_output.txt
@@ -62,6 +66,8 @@ For Homework 5, this submission also includes the required baseline object vocab
 - Course imports: [`ontology/imports/course-affordance.ttl`](ontology/imports/course-affordance.ttl), [`ontology/imports/course-alignment.ttl`](ontology/imports/course-alignment.ttl)
 - Required query: [`queries/graspable_objects.rq`](queries/graspable_objects.rq)
 - Additional query: [`queries/task_objects.rq`](queries/task_objects.rq)
+- Non-graspable task-object query: [`queries/non_graspable_task_objects.rq`](queries/non_graspable_task_objects.rq)
+- Affordance summary query: [`queries/object_affordance_summary.rq`](queries/object_affordance_summary.rq)
 - Reasoning workflow: [`src/run_reasoning.py`](src/run_reasoning.py)
 - SHACL shapes: [`ontology/shapes.ttl`](ontology/shapes.ttl)
 - SHACL validation workflow: [`src/run_validation.py`](src/run_validation.py)
@@ -116,6 +122,8 @@ The script writes:
 - `ontology/inferred-results.ttl`
 - `results/graspable_objects_output.txt`
 - `results/task_objects_output.txt`
+- `results/non_graspable_task_objects_output.txt`
+- `results/object_affordance_summary_output.txt`
 
 Run the SHACL structural validation with:
 
@@ -162,6 +170,8 @@ g10:pinkCup01
 ```
 
 The query output is saved in `results/graspable_objects_output.txt`.
+
+Two additional review queries are included. `queries/non_graspable_task_objects.rq` acts as a negative-control query for task-relevant objects that are not inferred as direct grasp targets, and should return `g10:plate01` and `g10:basket01`. `queries/object_affordance_summary.rq` lists each modeled task object with its type, role, affordance class, and inferred graspability status.
 
 ## What Is Inferred
 

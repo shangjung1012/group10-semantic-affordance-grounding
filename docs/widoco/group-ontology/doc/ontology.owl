@@ -11,7 +11,7 @@
      xmlns:terms="http://purl.org/dc/terms/"
      xmlns:aicapstone="https://hcis.io/ontology/aicapstone/2026/">
     <owl:Ontology rdf:about="https://hcis.io/ontology/aicapstone/2026/group10">
-        <owl:imports rdf:resource="file:/home/shangjung/Documents/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl"/>
+        <owl:imports rdf:resource="file:/C:/Users/ASUS/Desktop/114-2/AIC/hw5/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl"/>
         <terms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-05-26</terms:created>
         <terms:creator rdf:resource="https://hcis.io/ontology/aicapstone/2026/group10/group10"/>
         <terms:description xml:lang="en">This ontology defines Group 10 object instances, task roles, affordance individuals, and the graspable-object reasoning axiom used for Homework 5.</terms:description>

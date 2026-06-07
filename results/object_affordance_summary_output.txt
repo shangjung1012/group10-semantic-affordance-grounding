@@ -1,0 +1,12 @@
+obj           | type         | label            | role                  | affordance                 | graspable
+--------------+--------------+------------------+-----------------------+----------------------------+----------
+g10:basket01  | cap:Basket   | basket           | cap:ContainerTarget   | cap:ContainmentAffordance  | false    
+g10:block01   | cap:ToyBlock | toy_block_red    | cap:CollectableObject | cap:GraspingAffordance     | true     
+g10:block02   | cap:ToyBlock | toy_block_yellow | cap:CollectableObject | cap:GraspingAffordance     | true     
+g10:blueCup01 | cap:Cup      | blue_cup         | cap:TargetObject      | cap:GraspingAffordance     | true     
+g10:blueCup01 | cap:Cup      | blue_cup         | cap:TargetObject      | cap:StackabilityAffordance | true     
+g10:fork01    | cap:Fork     | fork             | cap:TargetObject      | cap:GraspingAffordance     | true     
+g10:knife01   | cap:Knife    | knife            | cap:TargetObject      | cap:GraspingAffordance     | true     
+g10:pinkCup01 | cap:Cup      | pink_cup         | cap:TargetObject      | cap:GraspingAffordance     | true     
+g10:pinkCup01 | cap:Cup      | pink_cup         | cap:TargetObject      | cap:StackabilityAffordance | true     
+g10:plate01   | cap:Plate    | plate            | cap:ReferenceObject   | cap:SupportAffordance      | false    

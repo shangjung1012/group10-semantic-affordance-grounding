@@ -219,7 +219,7 @@ cap:group10 a owl:Ontology ;
     vann:preferredNamespacePrefix "g10" ;
     vann:preferredNamespaceUri "https://hcis.io/ontology/aicapstone/2026/group10/" ;
     rdfs:comment "Group 10 ontology for grounding baseline AI Capstone task objects and inferring graspable objects from grasping affordances."@en ;
-    owl:imports <file:///home/shangjung/Documents/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> ;
+    owl:imports <imports/course-affordance.ttl> ;
     owl:sameAs cap:group10 .
 
 g10:cupStackingTask a owl:Thing,
@@ -250,8 +250,6 @@ g10:toyBlockCollectionTask a owl:Thing,
     cap:hasReferenceObject g10:basket01 ;
     cap:hasTargetObject g10:block01,
         g10:block02 .
-
-<file:///home/shangjung/Documents/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> owl:sameAs <file:///home/shangjung/Documents/group10-semantic-affordance-grounding/ontology/imports/course-affordance.ttl> .
 
 cora:Robot owl:sameAs cora:Robot .
 
@@ -481,6 +479,8 @@ g10:supportAffordance a owl:Thing,
     rdfs:label "support affordance"@en ;
     rdfs:comment "A reusable affordance individual indicating that an object can support placement or arrangement of other objects."@en ;
     owl:sameAs g10:supportAffordance .
+
+<imports/course-affordance.ttl> owl:sameAs <imports/course-affordance.ttl> .
 
 <mailto:ccy@hptp.org> owl:sameAs <mailto:ccy@hptp.org> .
 
